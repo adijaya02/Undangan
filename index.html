@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f4ed">
+  <title>Undangan Pernikahan — Raka & Sari</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+
+      color: white;
+      text-align: center;
+      background: #28372d;
+    }
+
+    /* Dua lapisan foto untuk transisi crossfade */
+    .slideshow-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      opacity: 0;
+      transform: scale(1.04);
+      transition:
+        opacity 0.8s ease-in-out,
+        transform 3s ease-out;
+
+      will-change: opacity, transform;
+    }
+
+    .slideshow-bg.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Overlay gelap tetap di atas foto */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+
+      background: linear-gradient(
+        rgba(34, 48, 38, 0.38),
+        rgba(34, 48, 38, 0.68)
+      );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slideshow-bg {
+        transition: opacity 0.3s ease;
+        transform: none;
+      }
+    }
+
+    /* Tombol Dark Mode */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 30px;
+
+      background: rgba(247, 244, 237, 0.88);
+      color: #28372d;
+
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(10px);
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    /* Tampilan ketika Dark Mode aktif */
+    body.dark-mode::after {
+      background: linear-gradient(
+        rgba(8, 12, 10, 0.62),
+        rgba(8, 12, 10, 0.82)
+      );
+    }
+
+    body.dark-mode .cover-page {
+      background: rgba(20, 24, 21, 0.64);
+      border-color: rgba(220, 226, 216, 0.28);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Warna tulisan saat Dark Mode */
+    body.dark-mode .cover-page .eyebrow {
+      color: #e8d6a8;
+    }
+
+    body.dark-mode .cover-page h1 {
+      color: #fff5dc;
+    }
+
+    body.dark-mode .cover-page p,
+    body.dark-mode .cover-page h2 {
+      color: #f3e7c8;
+    }
+
+    /* Tulisan nama penerima dibuat lebih keemasan */
+    body.dark-mode .teks-nama {
+      color: #f0d99b;
+    }
+
+    /* Tulisan tombol */
+    body.dark-mode .cover-page .btn {
+      background: #d8c18b;
+      color: #283027;
+      border: 1px solid #f0dfb3;
+    }
+
+    body.dark-mode .theme-toggle {
+      background: rgba(35, 42, 36, 0.94);
+      color: #f7f4ed;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Ukuran tombol pada HP */
+    @media (max-width: 480px) {
+      .theme-toggle {
+        top: 12px;
+        right: 12px;
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+    }
+
+    .cover-page{
+      width:min(560px,100%);
+      padding:clamp(28px,7vw,52px) 24px;
+      border:1px solid rgba(255,255,255,.58);
+      background:rgba(247,244,237,.14);
+      backdrop-filter:blur(9px);
+      border-radius:22px;
+      box-shadow:0 18px 60px rgba(0,0,0,.14)
+    }
+    .cover-page h1{
+      font-size:clamp(58px,12vw,90px);
+      line-height:1.15;
+      font-weight:400;
+      margin:25px 0 40px;
+    }
+    .teks-kepada{
+      margin:0 0 2px;
+    }
+    .teks-nama {
+      margin: 0 0 5px;
+      line-height: 1.2;
+      font-size: 35px;
+      font-weight: 1000;
+    }
+    .teks-undangan{
+      margin:3px 0 35px;
+      font-size: 16px;
+    }
+    .cover-page .btn{
+      background:#f7f4ed;
+      color:#28372d;
+      padding:14px 25px;
+    }
+    .cover-page .eyebrow{
+      color:#fff;
+    }
+  </style>
+</head>
+<body>
+  <button
+    type="button"
+    class="theme-toggle"
+    id="themeToggle"
+    aria-label="Aktifkan Dark Mode"
+    aria-pressed="false"
+  >
+    <span id="themeIcon" aria-hidden="true">🌙</span>
+    <span id="themeLabel">Dark Mode</span>
+  </button>
+  <main class="cover-page">
+    <div class="eyebrow">Undangan Pernikahan</div>
+    <h1 class="script">Raka &amp; Sari</h1>
+    <p class="teks-kepada">Kepada : </p>
+    <P class="teks-nama">TESTING</p>
+    <p class="teks-undangan">
+      Tanpa mengurangi rasa hormat,
+      <br>kami mengundang Anda untuk hadir di hari istimewa kami.
+    </p>
+    <a class="btn" href="undangan.html"> &nbsp; Buka Undangan</a>
+  </main>
+
+  <script>
+    const fotoSlideshow = [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1519225421980-888cb7f4b8c5?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1800&q=85"
+    ];
+
+    // Buat dua lapisan background
+    const layerA = document.createElement("div");
+    const layerB = document.createElement("div");
+
+    layerA.className = "slideshow-bg active";
+    layerB.className = "slideshow-bg";
+
+    document.body.prepend(layerA, layerB);
+
+    let fotoAktif = 0;
+    let lapisanAktif = layerA;
+    let lapisanBerikutnya = layerB;
+
+    // Tampilkan foto pertama
+    layerA.style.backgroundImage =
+      `url("${fotoSlideshow[0]}")`;
+
+    // Siapkan foto berikutnya
+    function muatFoto(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+    }
+
+    // Siapkan semua foto agar pergantian lebih mulus
+    Promise.all(
+      fotoSlideshow.map(url => muatFoto(url))
+    ).then(() => {
+      setInterval(() => {
+        const indeksBerikutnya =
+          (fotoAktif + 1) % fotoSlideshow.length;
+
+        lapisanBerikutnya.style.backgroundImage =
+          `url("${fotoSlideshow[indeksBerikutnya]}")`;
+
+        // Paksa browser menerapkan style sebelum transisi
+        void lapisanBerikutnya.offsetWidth;
+
+        lapisanBerikutnya.classList.add("active");
+        lapisanAktif.classList.remove("active");
+
+        [lapisanAktif, lapisanBerikutnya] =
+          [lapisanBerikutnya, lapisanAktif];
+
+        fotoAktif = indeksBerikutnya;
+      }, 4000);
+    });
+
+    const tombolTema = document.getElementById("themeToggle");
+    const ikonTema = document.getElementById("themeIcon");
+    const labelTema = document.getElementById("themeLabel");
+
+    // Baca mode yang tersimpan
+    let modeGelap = localStorage.getItem("mode-undangan") === "dark";
+
+    function terapkanTema() {
+      document.body.classList.toggle("dark-mode", modeGelap);
+
+      ikonTema.textContent = modeGelap ? "☀️" : "🌙";
+      labelTema.textContent = modeGelap ? "Light Mode" : "Dark Mode";
+
+      tombolTema.setAttribute(
+        "aria-label",
+        modeGelap ? "Aktifkan Light Mode" : "Aktifkan Dark Mode"
+      );
+
+      tombolTema.setAttribute("aria-pressed", String(modeGelap));
+    }
+
+    // Terapkan mode awal
+    terapkanTema();
+
+    // Ganti mode saat tombol diklik
+    tombolTema.addEventListener("click", () => {
+      modeGelap = !modeGelap;
+
+      localStorage.setItem(
+        "mode-undangan",
+        modeGelap ? "dark" : "light"
+      );
+
+      terapkanTema();
+    });
+
+  </script>
+
+</body>
+</html>
