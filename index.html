@@ -200,6 +200,35 @@
     .cover-page .eyebrow{
       color:#fff;
     }
+    /* Menghilangkan highlight biru saat elemen disentuh di HP */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Mencegah teks terblok atau terseleksi saat tombol ditekan */
+    button,
+    .btn,
+    .theme-toggle,
+    a,
+    input[type="button"],
+    input[type="submit"] {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    /* Mencegah seleksi teks pada tombol dan link */
+    button,
+    .btn,
+    .theme-toggle {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Tetap menampilkan indikator fokus untuk pengguna keyboard */
+    button:focus:not(:focus-visible),
+    a:focus:not(:focus-visible) {
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -216,7 +245,7 @@
   <main class="cover-page">
     <div class="eyebrow">Undangan Pernikahan</div>
     <h1 class="script">Raka &amp; Sari</h1>
-    <p class="teks-kepada">Kepada</p>
+    <p class="teks-kepada">Kepada : </p>
     <P class="teks-nama">TESTING</p>
     <p class="teks-undangan">
       Tanpa mengurangi rasa hormat,
