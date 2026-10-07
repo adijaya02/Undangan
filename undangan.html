@@ -341,6 +341,154 @@
         margin-right: auto;
     }
 
+    /* =========================================
+        KARTU RESEPSI - LAYOUT TANGGAL
+      ========================================= */
+
+      .reception-card {
+          width: min(100%, 630px);
+          margin: 35px auto 0;
+
+          padding: 42px 35px 38px;
+
+          background: var(--paper);
+          border: 1px solid rgba(255, 255, 255, .85);
+          border-radius: 20px;
+
+          text-align: center;
+
+          box-shadow: var(--shadow);
+      }
+
+
+      /* ICON */
+
+      .reception-card .event-icon {
+          width: 42px;
+          height: 42px;
+
+          margin: 0 auto 8px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          color: #a99a83;
+
+          font-size: 31px;
+          line-height: 1;
+      }
+
+
+      /* JUDUL */
+
+      .reception-title {
+          margin: 0;
+
+          font-family: "Great Vibes", cursive;
+          font-size: clamp(38px, 5vw, 52px);
+          font-weight: 400;
+
+          color: var(--ink);
+          line-height: 1.15;
+      }
+
+
+      /* BULAN */
+
+      .reception-month {
+          margin-top: 8px;
+
+          font-family: "Cormorant Garamond", serif;
+          font-size: 27px;
+          font-weight: 600;
+
+          color: #8f8373;
+      }
+
+
+      /* BAGIAN TANGGAL */
+
+      .reception-date {
+          width: min(430px, 100%);
+
+          margin: 10px auto 12px;
+
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+
+          align-items: center;
+      }
+
+
+      /* KIRI DAN KANAN */
+
+      .date-side {
+          min-height: 68px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-family: "Montserrat", sans-serif;
+          font-size: 20px;
+          font-weight: 600;
+
+          color: #8f8373;
+      }
+
+
+      /* GARIS PEMISAH */
+
+      .date-side:first-child {
+          border-right: 1px solid #a99a83;
+      }
+
+      .date-side:last-child {
+          border-left: 1px solid #a99a83;
+      }
+
+
+      /* ANGKA TANGGAL */
+
+      .date-number {
+          padding: 0 25px;
+
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(65px, 9vw, 82px);
+          font-weight: 700;
+
+          line-height: .95;
+
+          color: #9b8e7d;
+      }
+
+
+      /* JAM */
+
+      .reception-time {
+          margin-top: 12px;
+
+          font-family: "Cormorant Garamond", serif;
+          font-size: 21px;
+          font-weight: 600;
+
+          color: var(--ink);
+      }
+
+
+      /* ALAMAT */
+
+      .reception-location {
+          margin-top: 5px;
+
+          font-family: "Cormorant Garamond", serif;
+          font-size: 18px;
+          line-height: 1.45;
+
+          color: #8f8373;
+      }
+
     /* BAGIAN MEMPELAI */
 
     .couple-section {
@@ -1073,6 +1221,59 @@
         }
     }
 
+    @media (max-width: 600px) {
+
+        .reception-card {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 32px 18px 30px;
+
+            border-radius: 17px;
+        }
+
+        .reception-card .event-icon {
+            font-size: 27px;
+        }
+
+        .reception-title {
+            font-size: 38px;
+        }
+
+        .reception-month {
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .reception-date {
+            margin-top: 8px;
+        }
+
+        .date-side {
+            min-height: 58px;
+            font-size: 16px;
+        }
+
+        .date-number {
+            padding: 0 17px;
+            font-size: 64px;
+        }
+
+        .reception-time {
+            font-size: 18px;
+        }
+
+        .reception-location {
+            font-size: 16px;
+        }
+
+        .maps-button {
+            width: 100%;
+            max-width: 240px;
+            font-size: 14px;
+        }
+    }
 
   </style>
 </head>
@@ -1262,11 +1463,30 @@
             <p>Pukul 08.00 WIB – selesai</p>
             <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
           </article>-->
-          <article class="event-card">
+          <article class="event-card reception-card">
             <div class="event-icon">♡</div>
-            <h3>Resepsi</h3><p><strong>Senin, 23 Agustus 2027</strong></p>
-            <p>Pukul 11.00–14.00 WIB</p>
-            <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
+            <h3 class="reception-title">Resepsi Pernikahan</h3>
+            <div class="reception-month">
+                Agustus
+            </div>
+            <div class="reception-date">
+                <div class="date-side">
+                    <span>Senin</span>
+                </div>
+                <div class="date-number">
+                    23
+                </div>
+                <div class="date-side">
+                    <span>2027</span>
+                </div>
+            </div>
+            <div class="reception-time">
+                Pukul 11.00 WIB - 14.00 WIB
+            </div>
+            <div class="reception-location">
+                Gedung Serbaguna Melati<br>
+                Jl. Melati No. 12, Kota Bandung
+            </div>
           </article>
         </div>
         <div class="countdown" aria-label="Hitung mundur pernikahan">
@@ -1295,7 +1515,8 @@
     </section>
     <section id="cerita">
       <div class="section-inner center">
-        <div class="eyebrow">Setiap kisah punya awal</div><h2 class="section-title script">Our Story</h2>
+        <h2 class="section-title script">Our Story</h2>
+        <div class="eyebrow">Setiap kisah punya awal</div>
         <div class="story-grid">
           <article class="story-item">
             <div class="story-icon">♡</div>
@@ -1325,7 +1546,7 @@
     </section>
     <section id="lokasi" class="events">
       <div class="section-inner center">
-        <div class="eyebrow">Kami menunggu kehadiran Anda</div>
+        <!--<div class="eyebrow">Kami menunggu kehadiran Anda</div>-->
         <h2 class="section-title">Petunjuk Lokasi</h2>
         <div class="location-box">
           <div class="location-info">
