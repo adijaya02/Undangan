@@ -66,3 +66,27 @@ function copyAccount() { copyText(accountNumber,"nomor rekening"); }
 function copyAddress() { copyText(giftAddress,"alamat"); }
 const topButton = document.getElementById("topButton");
 if (topButton) topButton.addEventListener("click",() => window.scrollTo({top:0,behavior:"smooth"}));
+
+ if (sessionStorage.getItem("transisiUndangan") === "true") {
+    sessionStorage.removeItem("transisiUndangan");
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.body.classList.add("page-enter");
+    }
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".hero-slide");
+
+    if (slides.length < 2) return;
+
+    let currentSlide = 0;
+
+    setInterval(() => {
+        slides[currentSlide].classList.remove("active");
+
+        currentSlide = (currentSlide + 1) % slides.length;
+
+        slides[currentSlide].classList.add("active");
+    }, 5000);
+});
