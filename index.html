@@ -229,6 +229,38 @@
     a:focus:not(:focus-visible) {
       outline: none;
     }
+
+    /* Animasi keluar dari halaman pembuka */
+    body.page-exit .cover-page {
+      animation: coverExit 0.45s ease forwards;
+    }
+
+    body.page-exit .slideshow-bg {
+      opacity: 0 !important;
+      transition: opacity 0.45s ease;
+    }
+
+    @keyframes coverExit {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+    }
+
+    /* Hormati pengaturan pengurangan animasi */
+    @media (prefers-reduced-motion: reduce) {
+      body.page-exit .cover-page {
+        animation-duration: 0.01ms;
+      }
+
+      body.page-exit .slideshow-bg {
+        transition-duration: 0.01ms;
+      }
+    }
   </style>
 </head>
 <body>
@@ -251,7 +283,9 @@
       Tanpa mengurangi rasa hormat,
       <br>kami mengundang Anda untuk hadir di hari istimewa kami.
     </p>
-    <a class="btn" href="undangan.html"> &nbsp; Buka Undangan</a>
+    <a class="btn" href="undangan.html" id="openInvitation">
+       &nbsp; Buka Undangan
+    </a>
   </main>
 
   <script>
@@ -349,6 +383,25 @@
       );
 
       terapkanTema();
+    });
+
+    const tombolBuka = document.getElementById("openInvitation");
+
+    tombolBuka.addEventListener("click", function (event) {
+      // Hormati pengurangan animasi pada perangkat
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        sessionStorage.setItem("transisiUndangan", "true");
+        return;
+      }
+
+      event.preventDefault();
+
+      sessionStorage.setItem("transisiUndangan", "true");
+      document.body.classList.add("page-exit");
+
+      setTimeout(() => {
+        window.location.href = tombolBuka.href;
+      }, 450);
     });
 
   </script>
