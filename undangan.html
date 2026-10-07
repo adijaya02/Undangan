@@ -5,14 +5,1080 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f7f4ed">
   <title>Hari Bahagia Raka & Sari</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
+
+    :root {
+        --cream: #f7f4ed;
+        --paper: #fffdf8;
+        --sage: #dfe4d7;
+        --sage-dark: #536454;
+        --ink: #28372d;
+        --muted: #687266;
+        --line: rgba(40, 55, 45, .18);
+        --shadow: 0 14px 45px rgba(43, 52, 42, .10);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 76px;
+    }
+
+    body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 18px;
+        line-height: 1.6;
+        opacity: 1;
+    }
+
+    body.page-enter {
+      animation: pageEnter 0.7s ease both;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.page-enter {
+        animation: none;
+      }
+    }
+
+    a {
+        color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+
+    .nav {
+        position: fixed;
+        z-index: 20;
+        inset: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 13px max(5vw, 22px);
+        background: rgba(255, 253, 248, .94);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(12px);
+    }
+
+    .brand {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 17px;
+        letter-spacing: .08em;
+        white-space: nowrap;
+    }
+
+    .brand-mark {
+        color: var(--sage-dark);
+        font-size: 27px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: clamp(12px, 3vw, 34px);
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        font-size: 15px;
+        color: #4e5b50;
+    }
+
+    .nav-links a:hover {
+        color: #1c3023;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+    }
+
+    .menu-toggle {
+        display: none;
+        border: 1px solid var(--line);
+        background: transparent;
+        border-radius: 8px;
+        padding: 5px 10px;
+        color: var(--ink);
+    }
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        padding: 0 22px;
+
+        display: grid;
+        place-items: center;
+
+        overflow: hidden;
+        isolation: isolate;
+        text-align: center;
+    }
+
+    .hero-slideshow {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    /* Lapisan gelap di atas foto */
+    .hero-slideshow::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.48);
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+
+        z-index: 1;
+
+        opacity: 0;
+        transform: scale(1.04);
+
+        transition:
+            opacity 0.9s ease-in-out,
+            transform 4s ease;
+    }
+
+
+    .hero-slide.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        color: #fff;
+        width: min(760px, 100%);
+        padding: 35px 20px;
+    }
+
+    .eyebrow {
+        font-family: Montserrat, sans-serif;
+        font-size: 11px;
+        letter-spacing: .34em;
+        text-transform: uppercase;
+    }
+
+    .script {
+        font-family: "Great Vibes", cursive;
+        font-weight: 400;
+    }
+
+    .hero h1 {
+        font-size: clamp(64px, 10vw, 112px);
+        line-height: 1.12;
+        margin: 16px 0 12px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .hero p {
+        max-width: 520px;
+        margin: 0 auto;
+        font-size: 21px;
+    }
+
+    .hero-date {
+        margin-top: 26px;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        letter-spacing: .04em;
+    }
+
+    .hero-date::before,
+    .hero-date::after {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: rgba(255,255,255,.8);
+    }
+
+    .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--sage-dark);
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        cursor: pointer;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        letter-spacing: .04em;
+        transition: transform .2s, background .2s;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        background: #3f5142;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--sage-dark);
+        border: 1px solid var(--sage-dark);
+    }
+
+    .btn-outline:hover {
+        color: white;
+    }
+
+    .countdown {
+        position: relative;
+        z-index: 2;
+
+        width: min(660px, calc(100% - 32px));
+
+        margin: 38px auto 0;
+        padding: 22px 12px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        text-align: center;
+
+        background: var(--paper);
+        border: 1px solid rgba(255, 255, 255, .8);
+        border-radius: 18px;
+
+        box-shadow: var(--shadow);
+    }
+
+    .count-item + .count-item {
+        border-left: 1px solid var(--line);
+    }
+
+    .count-num {
+        display: block;
+        font-size: clamp(30px, 5vw, 40px);
+        line-height: 1.1;
+    }
+
+    .count-label {
+        color: var(--muted);
+        font-size: 14px;
+    }
+
+    section {
+        padding: 30px 22px;
+    }
+
+    .section-inner {
+        width: min(1000px, 100%);
+        margin: 0 auto;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: clamp(42px, 6vw, 60px);
+        line-height: 1.15;
+        font-weight: 400;
+        margin: 10px 0 18px;
+    }
+
+    .section-copy {
+        max-width: 650px;
+        margin: 0px 0px 30px 0px;
+    }
+
+    .events .section-copy {
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* BAGIAN MEMPELAI */
+
+    .couple-section {
+        padding: 0;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .couple-profile {
+        display: grid;
+
+        grid-template-columns:
+            minmax(280px, .85fr)
+            minmax(320px, 1.15fr);
+
+        align-items: end;
+        gap: 25px;
+        max-width: 1000px;
+        min-height: 420px;
+        margin: 0 auto;
+        padding: 30px 30px 0;
+    }
+
+
+    .couple-profile.bride {
+        grid-template-columns:
+            minmax(320px, 1.15fr)
+            minmax(280px, .85fr);
+    }
+
+    .profile-info {
+        min-width: 0;
+        text-align: center;
+        padding: 45px 8px;
+    }
+
+    .profile-info h3 {
+        overflow-wrap: break-word;
+        font-size: clamp(17px, 2vw, 23px);
+        line-height: 1.3;
+    }
+
+    .profile-nickname {
+        display: block;
+        font-family: "Great Vibes", cursive;
+        font-size: 36px;
+        color: #a99a83;
+        line-height: 1.2;
+    }
+
+    .profile-info h3 {
+        font-size: 22px;
+        font-weight: 500;
+        margin: 0 0 8px;
+    }
+
+    .profile-info p {
+        margin: 4px 0;
+        font-size: 16px;
+    }
+
+    .profile-divider {
+        margin: 8px 0 14px;
+        font-size: 13px;
+    }
+
+    .social-link {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 6px;
+        background: #a99a83;
+        color: #fff;
+        text-decoration: none;
+        font-family: Montserrat, sans-serif;
+        font-size: 11px;
+    }
+
+    /* =========================
+      FOTO MEMPELAI
+    ========================= */
+
+    .profile-photo-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 390px;
+        height: 390px;
+        justify-self: center;
+        align-self: end;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-top: 55px;
+    }
+
+
+    /* FOTO */
+
+    .profile-photo {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, .20);
+        z-index: 1;
+    }
+
+
+    /* =========================
+      TULISAN MELENGKUNG
+    ========================= */
+
+    .curved-title {
+        position: absolute;
+
+        left: 50%;
+        top: -50px;
+
+        width: 100%;
+        height: 100px;
+
+        transform: translateX(-50%);
+
+        overflow: visible;
+
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .curved-title text {
+        fill: #111;
+        font-family: "Caveat", cursive;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .curved-title path {
+        fill: none;
+        stroke: transparent;
+    }
+
+    .couple-names {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 18px 12px;
+        background:
+            linear-gradient(rgba(220, 220, 220, .82), rgba(220, 220, 220, .82)),
+            url("https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80")
+            center / cover;
+        text-align: center;
+        color: #000;
+        font-family: "Great Vibes", cursive;
+        font-size: clamp(36px, 6vw, 52px);
+    }
+
+    .couple-ampersand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: .7em;
+        font-weight: 700;
+    }
+
+    .ornament {
+        color: #74846f;
+        font-size: 28px;
+        margin: 18px 0;
+    }
+
+
+    .ampersand {
+        font-size: 48px;
+        color: var(--sage-dark);
+    }
+
+    .events {
+        background: #e5e8dd;
+    }
+
+    .event-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 700px);
+        justify-content: center;
+        gap: 22px;
+        margin-top: 35px;
+    }
+
+    .event-card {
+        background: rgba(255, 253, 248, .90);
+        border: 1px solid rgba(255, 255, 255, .8);
+        padding: clamp(24px, 4vw, 36px);
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 12px 35px rgba(43, 52, 42, .08);
+    }
+
+    .event-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #eef1e9;
+        color: var(--sage-dark);
+
+        font-size: 27px;
+    }
+
+    .event-card h3 {
+        font-size: 31px;
+        font-weight: 500;
+        margin: 8px 0;
+    }
+
+    .event-card p {
+        margin: 5px 0;
+    }
+
+    .event-card .small {
+        color: var(--muted);
+        font-size: 16px;
+    }
+
+    .story-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 42px;
+    }
+
+    .story-item {
+        text-align: center;
+        padding: 0 8px;
+    }
+
+    .story-icon {
+        font-size: 29px;
+        color: var(--sage-dark);
+    }
+
+    .story-item h3 {
+        font-size: 24px;
+        font-weight: 500;
+        margin: 8px 0 0;
+    }
+
+    .story-year {
+        font-family: Montserrat, sans-serif;
+        font-size: 11px;
+        letter-spacing: .12em;
+        color: var(--muted);
+    }
+
+    .story-item p {
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    .location-box {
+        border-radius: 20px;
+        overflow: hidden;
+        background: white;
+        box-shadow: var(--shadow);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 32px;
+    }
+
+    .location-info {
+        padding: 35px;
+    }
+
+    .location-info h3 {
+        font-size: 31px;
+        font-weight: 500;
+        margin: 0 0 10px;
+    }
+
+    .map-frame {
+        min-height: 300px;
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .rsvp {
+        background: #e5e8dd;
+    }
+
+    .form-card {
+        width: min(620px, 100%);
+        margin: 30px auto 0;
+        padding: clamp(22px, 5vw, 40px);
+        border-radius: 20px;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+        text-align: left;
+    }
+
+    .form-row {
+        margin-bottom: 18px;
+    }
+
+    .form-row label {
+        display: block;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        margin-bottom: 7px;
+        letter-spacing: .03em;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+        width: 100%;
+        border: 1px solid #d6dbd0;
+        background: white;
+        color: var(--ink);
+        border-radius: 9px;
+        padding: 12px 13px;
+        outline: none;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+        border-color: var(--sage-dark);
+        box-shadow: 0 0 0 3px rgba(83, 100, 84, .12);
+    }
+
+    .form-card .btn {
+        width: 100%;
+    }
+
+    .form-note {
+        font-family: Montserrat, sans-serif;
+        font-size: 11px;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 13px;
+    }
+
+    .gift-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin: 30px auto 0;
+        max-width: 760px;
+    }
+
+    .gift-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .gift-card h3 {
+        margin: 0;
+        font-size: 27px;
+        font-weight: 500;
+    }
+
+    .gift-card p {
+        margin: 8px 0;
+        font-size: 16px;
+    }
+
+    footer {
+        padding: 44px 20px 30px;
+        text-align: center;
+    }
+
+    footer .script {
+        font-size: 43px;
+    }
+
+    footer p {
+        color: var(--muted);
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+    .top-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 15;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 0;
+        background: var(--sage-dark);
+        color: white;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+    }
+
+    .cover {
+        position: fixed;
+        z-index: 50;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 25px;
+        background: linear-gradient(
+            rgba(34, 48, 38, .38),
+            rgba(34, 48, 38, .64)
+        ), url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85") center/cover;
+        color: white;
+        transition: opacity .7s, visibility .7s;
+    }
+
+    .cover.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .cover-card {
+        width: min(550px, 100%);
+        padding: 38px 24px;
+        border: 1px solid rgba(255, 255, 255, .55);
+        background: rgba(247, 244, 237, .13);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+    }
+
+    .cover h1 {
+        font-size: clamp(56px, 12vw, 88px);
+        line-height: 1.15;
+        margin: 15px 0;
+        font-weight: 400;
+    }
+
+    .cover p {
+        margin: 7px 0 24px;
+    }
+
+    .cover .btn {
+        background: #f7f4ed;
+        color: var(--ink);
+    }
+
+    @media (max-width: 480px) {
+        .couple-profile {
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 6px;
+            min-height: 280px;
+            padding: 12px 8px 0;
+        }
+
+        .couple-profile.bride {
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        }
+
+        .profile-info {
+            padding: 16px 2px;
+        }
+
+        .profile-info h3 {
+            font-size: 15px;
+        }
+
+        .profile-info p {
+            font-size: 12px;
+        }
+            .countdown {
+            width: 100%;
+            margin-top: 28px;
+            padding: 18px 4px;
+            border-radius: 16px;
+        }
+
+        .count-num {
+            font-size: 28px;
+        }
+
+        .count-label {
+            font-size: 11px;
+        }
+    }
+
+    @media (min-width: 761px) {
+        .couple-profile {
+            grid-template-columns: 42% 58%;
+            gap: 30px;
+            max-width: 1100px;
+            min-height: 520px;
+            padding: 40px 30px 0;
+            align-items: end;
+        }
+
+        .couple-profile.bride {
+            grid-template-columns: 58% 42%;
+        }
+
+        .profile-photo-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            height: 500px;
+            justify-self: center;
+            align-self: end;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-top: 55px;
+        }
+
+        .profile-info {
+            padding: 40px 8px;
+        }
+
+        .profile-photo {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 470px;
+
+            object-fit: cover;
+            object-position: center top;
+
+            border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+
+            box-shadow: 0 4px 12px rgba(0,0,0,.20);
+            z-index: 1;
+        }
+
+        .curved-title {
+            position: absolute;
+            left: 50%;
+            top: -80px;
+
+            width: 100%;
+            height: 100px;
+
+            transform: translateX(-50%);
+            overflow: visible;
+
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .curved-title text {
+            fill: #111;
+            font-family: "Montserrat", sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .nav {
+            padding: 10px 17px;
+        }
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            padding: 8px 20px 15px;
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-links.open {
+            display: flex;
+        }
+
+        .nav-links a {
+            padding: 10px 3px;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            padding: 0 18px;
+        }
+
+        .hero-slide {
+            background-position: center center;
+        }
+
+        .hero-content {
+            width: 90%;
+            padding: 20px 8px;
+        }
+
+        .hero p {
+            font-size: 19px;
+        }
+
+        section {
+            padding: 20px 19px;
+        }
+
+        .couple-profile,
+        .couple-profile.bride {
+            grid-template-columns: .9fr 1.1fr;
+            min-height: 320px;
+            gap: 8px;
+            padding: 20px 10px 0;
+        }
+
+        .profile-info {
+            padding: 20px 4px;
+        }
+
+        .profile-nickname {
+            font-size: 29px;
+        }
+
+        .profile-info h3 {
+            font-size: 17px;
+        }
+
+        .profile-info p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .profile-divider {
+            font-size: 10px;
+        }
+
+        .social-link {
+            padding: 6px 8px;
+            font-size: 10px;
+        }
+
+        .profile-photo-wrap {
+            width: 100%;
+            max-width: 270px;
+            height: 290px;
+            padding-top: 48px;
+        }
+
+        .profile-photo {
+            height: 285px;
+            border-radius: 50% 50% 0 0 / 32% 32% 0 0;
+        }
+
+      .curved-title {
+            width: 105%;
+            height: 82px;
+            top: -45px;
+        }
+
+        .curved-title text {
+            font-size: 25px;
+            letter-spacing: 1.5px;
+        }
+
+        .couple-profile.bride {
+            grid-template-columns: 1.2fr 1fr;
+        }
+
+        .couple-names {
+            gap: 10px;
+            padding: 14px 8px;
+            font-size: 38px;
+        }
+
+        .event-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .story-grid {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 28px;
+        }
+
+        .location-box {
+            grid-template-columns: 1fr;
+        }
+
+        .map-frame {
+            min-height: 270px;
+        }
+
+        .gift-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *:before,
+        *:after {
+            transition-duration: .01ms !important;
+            animation-duration: .01ms !important;
+        }
+
+        .hero-slide {
+            transition: none;
+            transform: none;
+        }
+    }
+
+
+  </style>
 </head>
 <body>
-  <nav class="nav" aria-label="Navigasi utama">
+  <!--<nav class="nav" aria-label="Navigasi utama">
     <a class="brand" href="#beranda">
-      <span class="brand-mark">
-        ❧
-      </span>
       <span>Raka
         <span style="padding:0 5px">
           &
@@ -28,7 +1094,7 @@
       <a href="#lokasi">Lokasi</a>
       <a href="#rsvp">RSVP</a>
     </div>
-  </nav>
+  </nav>-->
   <main>
     <header class="hero" id="beranda">
       <div class="hero-slideshow" aria-hidden="true">
@@ -50,7 +1116,7 @@
       </div>
       <div class="hero-content">
         <div class="eyebrow">
-          Undangan Pernikahan
+          The Wedding Of
         </div>
         <h1 class="script">Raka &amp; Sari</h1>
         <p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dan menjadi bagian dari hari istimewa kami.</p>
@@ -59,7 +1125,7 @@
         </div>
       </div>
     </header>
-    <div class="countdown" aria-label="Hitung mundur pernikahan">
+    <!--<div class="countdown" aria-label="Hitung mundur pernikahan">
       <div class="count-item">
         <span class="count-num" id="days">
           00
@@ -80,11 +1146,11 @@
         <span class="count-num" id="seconds">00</span>
         <span class="count-label">Detik</span>
       </div>
-    </div>
-    <section id="mempelai">
+    </div>-->
+    <section>
       <div class="section-inner center">
-        <div class="eyebrow">Dengan memohon rahmat Tuhan</div>
-        <h2 class="section-title">The Wedding Of</h2>
+        <!--<div class="eyebrow">Dengan memohon rahmat Tuhan</div>-->
+        <h2 class="section-title">Our Wedding</h2>
         <p class="section-copy">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
         <section class="couple-section" id="mempelai">
           <div class="couple-profile groom">
@@ -179,22 +1245,23 @@
               </div>
           </div>
       </section>
-        <div class="ornament">❧ ❦ ❧</div>
-        <p class="section-copy"><em>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”</em><br>— QS. Ar-Rum: 21</p>
+        <!--<div class="ornament">❧ ❦ ❧</div>
+        <p class="section-copy"><em>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”</em><br>— QS. Ar-Rum: 21</p>-->
       </div>
     </section>
     <section class="events" id="acara">
       <div class="section-inner center">
-        <div class="eyebrow">Catat tanggalnya</div>
-        <h2 class="section-title">Waktu &amp; Tempat</h2>
+        <!--<div class="eyebrow">Catat tanggalnya</div>-->
+        <!--<h2 class="section-title">Waktu &amp; Tempat</h2>-->
+        <h2 class="section-title">Save The Date</h2>
         <p class="section-copy">Dengan penuh kebahagiaan, kami menantikan kehadiran Anda di acara pernikahan kami.</p>
         <div class="event-grid">
-          <article class="event-card">
+          <!--<article class="event-card">
             <div class="event-icon">♧</div>
             <h3>Akad Nikah</h3><p><strong>Senin, 23 Agustus 2027</strong></p>
             <p>Pukul 08.00 WIB – selesai</p>
             <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
-          </article>
+          </article>-->
           <article class="event-card">
             <div class="event-icon">♡</div>
             <h3>Resepsi</h3><p><strong>Senin, 23 Agustus 2027</strong></p>
@@ -202,6 +1269,28 @@
             <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
           </article>
         </div>
+        <div class="countdown" aria-label="Hitung mundur pernikahan">
+            <div class="count-item">
+              <span class="count-num" id="days">
+                00
+              </span>
+              <span class="count-label">
+                Hari
+              </span>
+            </div>
+            <div class="count-item">
+              <span class="count-num" id="hours">00</span>
+              <span class="count-label">Jam</span>
+            </div>
+            <div class="count-item">
+              <span class="count-num" id="minutes">00</span>
+              <span class="count-label">Menit</span>
+            </div>
+            <div class="count-item">
+              <span class="count-num" id="seconds">00</span>
+              <span class="count-label">Detik</span>
+            </div>
+          </div>
       </div>
     </section>
     <section id="cerita">
@@ -314,6 +1403,99 @@
     <p>Terima kasih atas doa dan restunya.</p>
   </footer>
   <button class="top-button" id="topButton" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
-  <script src="script.js"></script>
+  <script>
+      // ===== PENGATURAN UTAMA: sesuaikan data ini dengan acara Anda =====
+      const weddingDate = new Date("2027-08-23T08:00:00+07:00"); // YYYY-MM-DDTHH:mm:ss+07:00
+      const whatsappNumber = "6281234567890"; // Ganti dengan nomor WhatsApp penerima, kode negara tanpa +
+      const accountNumber = "1234567890"; // Ganti nomor rekening contoh
+      const giftAddress = "Raka & Sari, Jl. Melati No. 12, Kota Bandung";
+      // ================================================================
+
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", () => {
+          const opened = navLinks.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", String(opened));
+          menuToggle.textContent = opened ? "✕" : "☰";
+        });
+        navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        }));
+      }
+
+      function updateCountdown() {
+        const diff = weddingDate.getTime() - Date.now();
+        const values = diff <= 0 ? [0,0,0,0] : [
+          Math.floor(diff / 86400000),
+          Math.floor((diff % 86400000) / 3600000),
+          Math.floor((diff % 3600000) / 60000),
+          Math.floor((diff % 60000) / 1000)
+        ];
+        ["days","hours","minutes","seconds"].forEach((id,i) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = String(values[i]).padStart(2,"0");
+        });
+      }
+      if (document.getElementById("days")) {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      const rsvpForm = document.getElementById("rsvpForm");
+      if (rsvpForm) rsvpForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("guestName").value.trim();
+        const attendance = document.getElementById("attendance").value;
+        const count = document.getElementById("guestCount").value;
+        const message = document.getElementById("message").value.trim();
+        if (!name || !attendance) return;
+        const text = [
+          "Konfirmasi Undangan Pernikahan Raka & Sari", "",
+          "Nama: " + name,
+          "Kehadiran: " + attendance,
+          "Jumlah tamu: " + (attendance === "Hadir" ? count : "0"),
+          message ? "Ucapan: " + message : ""
+        ].filter(Boolean).join("\n");
+        window.open("https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      });
+
+      function copyText(value,label) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(value).then(() => alert(label + " berhasil disalin."))
+            .catch(() => window.prompt("Salin " + label + " berikut:",value));
+        } else window.prompt("Salin " + label + " berikut:",value);
+      }
+      function copyAccount() { copyText(accountNumber,"nomor rekening"); }
+      function copyAddress() { copyText(giftAddress,"alamat"); }
+      const topButton = document.getElementById("topButton");
+      if (topButton) topButton.addEventListener("click",() => window.scrollTo({top:0,behavior:"smooth"}));
+
+      if (sessionStorage.getItem("transisiUndangan") === "true") {
+          sessionStorage.removeItem("transisiUndangan");
+
+          if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.body.classList.add("page-enter");
+          }
+        }
+
+      document.addEventListener("DOMContentLoaded", () => {
+          const slides = document.querySelectorAll(".hero-slide");
+
+          if (slides.length < 2) return;
+
+          let currentSlide = 0;
+
+          setInterval(() => {
+              slides[currentSlide].classList.remove("active");
+
+              currentSlide = (currentSlide + 1) % slides.length;
+
+              slides[currentSlide].classList.add("active");
+          }, 5000);
+      });
+  </script>
 </body>
 </html>
