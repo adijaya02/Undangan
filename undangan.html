@@ -9,66 +9,310 @@
 </head>
 <body>
   <nav class="nav" aria-label="Navigasi utama">
-    <a class="brand" href="#beranda"><span class="brand-mark">❧</span><span>Raka <span style="padding:0 5px">&</span> Sari</span></a>
+    <a class="brand" href="#beranda">
+      <span class="brand-mark">
+        ❧
+      </span>
+      <span>Raka
+        <span style="padding:0 5px">
+          &
+        </span> 
+        Sari
+      </span>
+    </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks"><a href="#beranda">Beranda</a><a href="#mempelai">Mempelai</a><a href="#acara">Acara</a><a href="#lokasi">Lokasi</a><a href="#rsvp">RSVP</a></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#beranda">Beranda</a>
+      <a href="#mempelai">Mempelai</a>
+      <a href="#acara">Acara</a>
+      <a href="#lokasi">Lokasi</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
   </nav>
   <main>
     <header class="hero" id="beranda">
-      <div class="hero-content"><div class="eyebrow">Undangan Pernikahan</div><h1 class="script">Raka &amp; Sari</h1><p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dan menjadi bagian dari hari istimewa kami.</p><div class="hero-date">Sabtu, 23 Agustus 2027</div></div>
+      <div class="hero-slideshow" aria-hidden="true">
+        <div class="hero-slide active"
+            style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=85')">
+        </div>
+
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2200&q=85')">
+        </div>
+
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=2200&q=85')">
+        </div>
+
+        <div class="hero-slide"
+            style="background-image: url('https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=2200&q=85')">
+        </div>
+      </div>
+      <div class="hero-content">
+        <div class="eyebrow">
+          Undangan Pernikahan
+        </div>
+        <h1 class="script">Raka &amp; Sari</h1>
+        <p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dan menjadi bagian dari hari istimewa kami.</p>
+        <div class="hero-date">
+          Sabtu, 23 Agustus 2027
+        </div>
+      </div>
     </header>
     <div class="countdown" aria-label="Hitung mundur pernikahan">
-      <div class="count-item"><span class="count-num" id="days">00</span><span class="count-label">Hari</span></div>
-      <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-label">Jam</span></div>
-      <div class="count-item"><span class="count-num" id="minutes">00</span><span class="count-label">Menit</span></div>
-      <div class="count-item"><span class="count-num" id="seconds">00</span><span class="count-label">Detik</span></div>
+      <div class="count-item">
+        <span class="count-num" id="days">
+          00
+        </span>
+        <span class="count-label">
+          Hari
+        </span>
+      </div>
+      <div class="count-item">
+        <span class="count-num" id="hours">00</span>
+        <span class="count-label">Jam</span>
+      </div>
+      <div class="count-item">
+        <span class="count-num" id="minutes">00</span>
+        <span class="count-label">Menit</span>
+      </div>
+      <div class="count-item">
+        <span class="count-num" id="seconds">00</span>
+        <span class="count-label">Detik</span>
+      </div>
     </div>
-    <section id="mempelai"><div class="section-inner center">
-      <div class="eyebrow">Dengan memohon rahmat Tuhan</div><h2 class="section-title">The Wedding Of</h2>
-      <p class="section-copy">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
-      <div class="couple-grid">
-        <article class="person"><img class="person-photo" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=85" alt="Foto mempelai pria"><h3 class="script">Raka Aditya</h3><p>Putra dari Bapak Nama Ayah<br>dan Ibu Nama Ibu</p></article>
-        <div class="ampersand script">&amp;</div>
-        <article class="person"><img class="person-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=85" alt="Foto mempelai wanita"><h3 class="script">Sari Pertiwi</h3><p>Putri dari Bapak Nama Ayah<br>dan Ibu Nama Ibu</p></article>
+    <section id="mempelai">
+      <div class="section-inner center">
+        <div class="eyebrow">Dengan memohon rahmat Tuhan</div>
+        <h2 class="section-title">The Wedding Of</h2>
+        <p class="section-copy">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+        <section class="couple-section" id="mempelai">
+          <div class="couple-profile groom">
+              <div class="profile-info">
+                  <span class="profile-nickname">Raka</span>
+                  <h3>Nama Lengkap Mempelai Pria</h3>
+                  <p>Putra dari Pasangan</p>
+                  <p>Bapak Nama Ayah</p>
+                  <p>dan Ibu Nama Ibu</p>
+                  <p>Beralamat di Nama Kota</p>
+                  <div class="profile-divider">──────────</div>
+              </div>
+
+              <div class="profile-photo-wrap">
+                <svg
+                    class="curved-title"
+                    viewBox="0 0 400 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="The Groom"
+                >
+                    <path
+                        id="groom-curve"
+                        d="M 35,88 Q 200,30 365,88"
+                        fill="none"
+                    />
+
+                    <text>
+                        <textPath
+                            href="#groom-curve"
+                            startOffset="50%"
+                            text-anchor="middle"
+                        >
+                            THE GROOM
+                        </textPath>
+                    </text>
+                </svg>
+
+                <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85"
+                    alt="Foto mempelai pria"
+                    class="profile-photo"
+                >
+              </div>
+          </div>
+
+          <div class="couple-names">
+              <span>Raka</span>
+              <span class="couple-ampersand">&amp;</span>
+              <span>Sari</span>
+          </div>
+
+          <div class="couple-profile bride">
+              <div class="profile-photo-wrap">
+                <svg
+                    class="curved-title"
+                    viewBox="0 0 400 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="The Bride"
+                >
+                    <path
+                        id="bride-curve"
+                        d="M 35,88 Q 200,30 365,88"
+                        fill="none"
+                    />
+
+                    <text>
+                        <textPath
+                            href="#bride-curve"
+                            startOffset="50%"
+                            text-anchor="middle"
+                        >
+                            THE BRIDE
+                        </textPath>
+                    </text>
+                </svg>
+
+                <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=85"
+                    alt="Foto mempelai wanita"
+                    class="profile-photo"
+                >
+              </div>
+
+              <div class="profile-info">
+                  <span class="profile-nickname">Sari</span>
+                  <h3>Nama Lengkap Mempelai Wanita</h3>
+                  <p>Putri dari Pasangan</p>
+                  <p>Bapak Nama Ayah</p>
+                  <p>dan Ibu Nama Ibu</p>
+                  <p>Beralamat di Nama Kota</p>
+                  <div class="profile-divider">──────────</div>
+              </div>
+          </div>
+      </section>
+        <div class="ornament">❧ ❦ ❧</div>
+        <p class="section-copy"><em>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”</em><br>— QS. Ar-Rum: 21</p>
       </div>
-      <div class="ornament">❧ ❦ ❧</div><p class="section-copy"><em>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”</em><br>— QS. Ar-Rum: 21</p>
-    </div></section>
-    <section class="events" id="acara"><div class="section-inner center">
-      <div class="eyebrow">Catat tanggalnya</div><h2 class="section-title">Waktu &amp; Tempat</h2><p class="section-copy">Dengan penuh kebahagiaan, kami menantikan kehadiran Anda di acara pernikahan kami.</p>
-      <div class="event-grid">
-        <article class="event-card"><div class="event-icon">♧</div><h3>Akad Nikah</h3><p><strong>Senin, 23 Agustus 2027</strong></p><p>Pukul 08.00 WIB – selesai</p><p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p></article>
-        <article class="event-card"><div class="event-icon">♡</div><h3>Resepsi</h3><p><strong>Senin, 23 Agustus 2027</strong></p><p>Pukul 11.00–14.00 WIB</p><p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p></article>
+    </section>
+    <section class="events" id="acara">
+      <div class="section-inner center">
+        <div class="eyebrow">Catat tanggalnya</div>
+        <h2 class="section-title">Waktu &amp; Tempat</h2>
+        <p class="section-copy">Dengan penuh kebahagiaan, kami menantikan kehadiran Anda di acara pernikahan kami.</p>
+        <div class="event-grid">
+          <article class="event-card">
+            <div class="event-icon">♧</div>
+            <h3>Akad Nikah</h3><p><strong>Senin, 23 Agustus 2027</strong></p>
+            <p>Pukul 08.00 WIB – selesai</p>
+            <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
+          </article>
+          <article class="event-card">
+            <div class="event-icon">♡</div>
+            <h3>Resepsi</h3><p><strong>Senin, 23 Agustus 2027</strong></p>
+            <p>Pukul 11.00–14.00 WIB</p>
+            <p class="small">Gedung Serbaguna Melati<br>Jl. Melati No. 12, Kota Bandung</p>
+          </article>
+        </div>
       </div>
-    </div></section>
-    <section id="cerita"><div class="section-inner center">
-      <div class="eyebrow">Setiap kisah punya awal</div><h2 class="section-title script">Our Story</h2>
-      <div class="story-grid">
-        <article class="story-item"><div class="story-icon">♡</div><h3>Pertemuan</h3><div class="story-year">2019</div><p>Kisah kami dimulai dari sebuah pertemuan sederhana yang tidak pernah kami sangka.</p></article>
-        <article class="story-item"><div class="story-icon">✉</div><h3>Menjalin Hubungan</h3><div class="story-year">2020</div><p>Perlahan, kami belajar saling mengenal, memahami, dan tumbuh bersama.</p></article>
-        <article class="story-item"><div class="story-icon">♡</div><h3>Lamaran</h3><div class="story-year">2026</div><p>Dengan restu keluarga, kami memantapkan hati untuk melangkah ke jenjang berikutnya.</p></article>
-        <article class="story-item"><div class="story-icon">⌂</div><h3>Menikah</h3><div class="story-year">2027</div><p>Kini kami siap memulai babak baru dalam perjalanan hidup bersama.</p></article>
+    </section>
+    <section id="cerita">
+      <div class="section-inner center">
+        <div class="eyebrow">Setiap kisah punya awal</div><h2 class="section-title script">Our Story</h2>
+        <div class="story-grid">
+          <article class="story-item">
+            <div class="story-icon">♡</div>
+            <h3>Pertemuan</h3><div class="story-year">2019</div>
+            <p>Kisah kami dimulai dari sebuah pertemuan sederhana yang tidak pernah kami sangka.</p>
+          </article>
+          <article class="story-item">
+            <div class="story-icon">✉</div>
+            <h3>Menjalin Hubungan</h3>
+            <div class="story-year">2020</div>
+            <p>Perlahan, kami belajar saling mengenal, memahami, dan tumbuh bersama.</p>
+          </article>
+          <article class="story-item">
+            <div class="story-icon">♡</div>
+            <h3>Lamaran</h3>
+            <div class="story-year">2026</div>
+            <p>Dengan restu keluarga, kami memantapkan hati untuk melangkah ke jenjang berikutnya.</p>
+          </article>
+          <article class="story-item">
+            <div class="story-icon">⌂</div>
+            <h3>Menikah</h3>
+            <div class="story-year">2027</div>
+            <p>Kini kami siap memulai babak baru dalam perjalanan hidup bersama.</p>
+          </article>
+        </div>
       </div>
-    </div></section>
-    <section id="lokasi" class="events"><div class="section-inner center">
-      <div class="eyebrow">Kami menunggu kehadiran Anda</div><h2 class="section-title">Petunjuk Lokasi</h2>
-      <div class="location-box"><div class="location-info"><div class="event-icon">⌖</div><h3>Gedung Serbaguna Melati</h3><p>Jl. Melati No. 12, Kota Bandung, Jawa Barat</p><p class="small">23 Agustus 2027<br>Akad 08.00 WIB · Resepsi 11.00 WIB</p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Melati+Bandung">Buka Google Maps ↗</a></div><iframe class="map-frame" title="Peta lokasi acara" loading="lazy" src="https://maps.google.com/maps?q=Bandung%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe></div>
-    </div></section>
-    <section class="rsvp" id="rsvp"><div class="section-inner center">
-      <div class="eyebrow">Mohon konfirmasi kehadiran</div><h2 class="section-title script">RSVP</h2><p class="section-copy">Mohon konfirmasikan kehadiran Anda melalui formulir berikut.</p>
-      <form class="form-card" id="rsvpForm">
-        <div class="form-row"><label for="guestName">Nama lengkap</label><input id="guestName" name="nama" autocomplete="name" placeholder="Masukkan nama Anda" required></div>
-        <div class="form-row"><label for="attendance">Konfirmasi kehadiran</label><select id="attendance" name="kehadiran" required><option value="">Pilih konfirmasi</option><option value="Hadir">Ya, saya akan hadir</option><option value="Tidak hadir">Maaf, saya tidak dapat hadir</option></select></div>
-        <div class="form-row"><label for="guestCount">Jumlah tamu</label><select id="guestCount" name="jumlah"><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option><option value="4">4 orang</option></select></div>
-        <div class="form-row"><label for="message">Ucapan dan doa (opsional)</label><textarea id="message" name="pesan" rows="3" placeholder="Tuliskan ucapan terbaik Anda..."></textarea></div>
-        <button class="btn" type="submit">Kirim Konfirmasi via WhatsApp ↗</button><p class="form-note">Formulir membuka WhatsApp. Data tidak disimpan di website ini.</p>
-      </form>
-    </div></section>
-    <section id="hadiah"><div class="section-inner center">
-      <div class="eyebrow">Tanda kasih</div><h2 class="section-title">Wedding Gift</h2><p class="section-copy">Doa restu Anda merupakan hadiah terindah bagi kami. Namun, apabila ingin berbagi tanda kasih, dapat melalui informasi berikut.</p>
-      <div class="gift-grid"><div class="gift-card"><h3>Bank BCA</h3><p id="accountNumber">1234567890</p><p>a.n. Raka Aditya</p><button class="btn btn-outline" type="button" onclick="copyAccount()">Salin Nomor Rekening</button></div><div class="gift-card"><h3>Alamat Kado</h3><p>Raka &amp; Sari</p><p>Jl. Melati No. 12, Kota Bandung</p><button class="btn btn-outline" type="button" onclick="copyAddress()">Salin Alamat</button></div></div>
-    </div></section>
+    </section>
+    <section id="lokasi" class="events">
+      <div class="section-inner center">
+        <div class="eyebrow">Kami menunggu kehadiran Anda</div>
+        <h2 class="section-title">Petunjuk Lokasi</h2>
+        <div class="location-box">
+          <div class="location-info">
+            <div class="event-icon">⌖</div>
+            <h3>Gedung Serbaguna Melati</h3>
+            <p>Jl. Melati No. 12, Kota Bandung, Jawa Barat</p>
+            <p class="small">23 Agustus 2027<br>Akad 08.00 WIB · Resepsi 11.00 WIB</p>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Melati+Bandung">Buka Google Maps ↗</a>
+          </div>
+          <iframe class="map-frame" title="Peta lokasi acara" loading="lazy" src="https://maps.google.com/maps?q=Bandung%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+    <section class="rsvp" id="rsvp">
+      <div class="section-inner center">
+        <div class="eyebrow">Mohon konfirmasi kehadiran</div>
+        <h2 class="section-title script">RSVP</h2>
+        <p class="section-copy">Mohon konfirmasikan kehadiran Anda melalui formulir berikut.</p>
+        <form class="form-card" id="rsvpForm">
+          <div class="form-row">
+            <label for="guestName">Nama lengkap</label>
+            <input id="guestName" name="nama" autocomplete="name" placeholder="Masukkan nama Anda" required>
+          </div>
+          <div class="form-row">
+            <label for="attendance">Konfirmasi kehadiran</label>
+            <select id="attendance" name="kehadiran" required>
+              <option value="">Pilih konfirmasi</option>
+              <option value="Hadir">Ya, saya akan hadir</option>
+              <option value="Tidak hadir">Maaf, saya tidak dapat hadir</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="guestCount">Jumlah tamu</label>
+            <select id="guestCount" name="jumlah">
+              <option value="1">1 orang</option>
+              <option value="2">2 orang</option>
+              <option value="3">3 orang</option>
+              <option value="4">4 orang</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">Ucapan dan doa (opsional)</label>
+            <textarea id="message" name="pesan" rows="3" placeholder="Tuliskan ucapan terbaik Anda..."></textarea>
+          </div>
+          <button class="btn" type="submit">Kirim Konfirmasi via WhatsApp ↗</button>
+          <p class="form-note">Formulir membuka WhatsApp. Data tidak disimpan di website ini.</p>
+        </form>
+      </div>
+    </section>
+    <section id="hadiah">
+      <div class="section-inner center">
+        <div class="eyebrow">Tanda kasih</div>
+        <h2 class="section-title">Wedding Gift</h2>
+        <p class="section-copy">Doa restu Anda merupakan hadiah terindah bagi kami. Namun, apabila ingin berbagi tanda kasih, dapat melalui informasi berikut.</p>
+        <div class="gift-grid">
+          <div class="gift-card">
+            <h3>Bank BCA</h3><p id="accountNumber">1234567890</p>
+            <p>a.n. Raka Aditya</p>
+            <button class="btn btn-outline" type="button" onclick="copyAccount()">Salin Nomor Rekening</button>
+          </div>
+          <div class="gift-card">
+            <h3>Alamat Kado</h3>
+            <p>Raka &amp; Sari</p>
+            <p>Jl. Melati No. 12, Kota Bandung</p>
+            <button class="btn btn-outline" type="button" onclick="copyAddress()">Salin Alamat</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer><div class="ornament">❧</div><div class="script">Raka &amp; Sari</div><p>Merupakan kebahagiaan bagi kami untuk berbagi hari istimewa ini bersama Anda.</p><p>Terima kasih atas doa dan restunya.</p></footer>
+  <footer>
+    <div class="ornament">❧</div>
+    <div class="script">Raka &amp; Sari</div>
+    <p>Merupakan kebahagiaan bagi kami untuk berbagi hari istimewa ini bersama Anda.</p>
+    <p>Terima kasih atas doa dan restunya.</p>
+  </footer>
   <button class="top-button" id="topButton" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
   <script src="script.js"></script>
 </body>
