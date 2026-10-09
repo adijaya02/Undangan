@@ -326,7 +326,7 @@
         font-size: clamp(42px, 6vw, 60px);
         line-height: 1.15;
         font-weight: 400;
-        margin: 10px 0 18px;
+        margin: 10px 0 5px;
     }
 
     .section-copy {
@@ -757,31 +757,56 @@
         margin: 8px 0;
     }
 
+    /* KARTU LOKASI */
     .location-box {
-        border-radius: 20px;
-        overflow: hidden;
-        background: white;
-        box-shadow: var(--shadow);
+        width: 100%;
+        max-width: 900px;
+        margin: 32px auto 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        margin-top: 32px;
+        align-items: stretch;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
     }
 
+    /* INFORMASI LOKASI */
     .location-info {
-        padding: 35px;
+        min-width: 0;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .location-info h3 {
-        font-size: 31px;
-        font-weight: 500;
-        margin: 0 0 10px;
+        font-size: clamp(23px, 3vw, 31px);
+        line-height: 1.25;
+        overflow-wrap: anywhere;
     }
 
+    .location-info p {
+        overflow-wrap: anywhere;
+    }
+
+    /* PETA */
     .map-frame {
-        min-height: 300px;
-        border: 0;
+        display: block;
         width: 100%;
         height: 100%;
+        min-height: 340px;
+        border: 0;
+    }
+
+    /* TOMBOL GOOGLE MAPS */
+    .location-info .btn {
+        max-width: 100%;
+        margin-top: 12px;
+        text-align: center;
     }
 
     .rsvp {
@@ -841,32 +866,269 @@
         margin-top: 13px;
     }
 
-    .gift-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-        margin: 30px auto 0;
+    /* ================================
+    WEDDING GIFT - KARTU REKENING
+    ================================ */
+
+    #hadiah {
+        background: #fffdf8;
+        padding: 45px 20px 60px;
+    }
+
+    #hadiah .section-inner {
         max-width: 760px;
     }
 
-    .gift-card {
-        background: var(--paper);
-        border: 1px solid var(--line);
-        border-radius: 15px;
-        padding: 25px;
+    #hadiah .section-title {
+        color: #28372d;
+    }
+
+    #hadiah .section-copy {
+        margin: 10px auto 32px;
+        max-width: 600px;
         text-align: center;
+        font-size: 17px;
+        line-height: 1.8;
     }
 
-    .gift-card h3 {
+    .gift-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 30px auto 0;
+        align-items: stretch;
+    }
+
+    /* Kartu rekening */
+    .gift-card {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1.586 / 1;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+        isolation: isolate;
+
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, .95);
+        border-radius: 16px;
+
+        background:
+            radial-gradient(ellipse at 85% 20%,
+                rgba(255,255,255,.98) 0%,
+                rgba(255,255,255,.35) 35%,
+                transparent 60%),
+            radial-gradient(ellipse at 100% 100%,
+                rgba(198,202,198,.45),
+                transparent 50%),
+            linear-gradient(135deg,
+                #fdfdfc 0%,
+                #f0f0ee 48%,
+                #ffffff 100%);
+
+        box-shadow:
+            0 3px 4px rgba(0,0,0,.15),
+            inset 0 0 0 1px rgba(255,255,255,.85);
+
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Pola dekoratif kartu */
+    .gift-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        background:
+            radial-gradient(circle,
+                rgba(160,160,160,.17) 1px,
+                transparent 1.7px);
+
+        background-size: 7px 7px;
+        mask-image: linear-gradient(
+            135deg,
+            transparent 35%,
+            #000 100%
+        );
+        opacity: .8;
+    }
+
+    .gift-card::after {
+        content: "";
+        position: absolute;
+        width: 65%;
+        height: 150%;
+        right: -22%;
+        top: -45%;
+        z-index: -1;
+        pointer-events: none;
+
+        border: 1px solid rgba(255,255,255,.8);
+        border-radius: 50%;
+        transform: rotate(30deg);
+        box-shadow:
+            -15px 0 0 rgba(255,255,255,.15),
+            -30px 0 0 rgba(255,255,255,.12);
+    }
+
+    /* Bagian atas kartu */
+    .gift-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    /* Chip kartu */
+    .gift-chip {
+        width: 39px;
+        height: 31px;
+        flex-shrink: 0;
+        margin-top: 2px;
+
+        border: 1px solid #b7a16c;
+        border-radius: 7px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent 31%,
+                rgba(130,100,42,.45) 32%,
+                transparent 35%,
+                transparent 65%,
+                rgba(130,100,42,.45) 67%,
+                transparent 70%
+            ),
+            linear-gradient(
+                0deg,
+                transparent 30%,
+                rgba(130,100,42,.45) 32%,
+                transparent 35%,
+                transparent 65%,
+                rgba(130,100,42,.45) 67%,
+                transparent 70%
+            ),
+            linear-gradient(135deg, #f7e7a9, #c7a35c, #f5e5a5);
+
+        box-shadow: inset 0 1px 2px rgba(255,255,255,.8);
+    }
+
+    /* Logo bank */
+    .gift-bank-logo {
+        max-width: 125px;
+        max-height: 38px;
+        object-fit: contain;
+        object-position: right top;
+    }
+
+    .gift-bank-name {
         margin: 0;
-        font-size: 27px;
-        font-weight: 500;
+        font-family: Arial, sans-serif;
+        font-size: 21px;
+        font-weight: 800;
+        line-height: 1.2;
+        color: #0866b5;
+        text-align: right;
     }
 
-    .gift-card p {
-        margin: 8px 0;
-        font-size: 16px;
+    .gift-bank-name.sinarmas {
+        color: #555;
+        font-size: 17px;
     }
+
+    /* Informasi rekening */
+    .gift-card-info {
+        position: relative;
+        z-index: 2;
+        padding-bottom: 2px;
+    }
+
+    .gift-card-number {
+        margin: 0 !important;
+        font-family: Arial, sans-serif;
+        font-size: clamp(19px, 4vw, 25px) !important;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: 1px;
+        color: #555b61;
+        overflow-wrap: anywhere;
+    }
+
+    .gift-card-owner {
+        margin: 0 !important;
+        font-family: Arial, sans-serif;
+        font-size: 17px !important;
+        line-height: 1.4;
+        letter-spacing: .5px;
+        color: #60666d;
+        overflow-wrap: anywhere;
+    }
+
+    /* Tombol salin */
+    .gift-copy-btn {
+        position: absolute;
+        right: 17px;
+        bottom: 17px;
+        z-index: 3;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        min-width: 78px;
+        min-height: 36px;
+        padding: 8px 12px;
+
+        border: 0;
+        border-radius: 7px;
+        background: #a5a7a8;
+        color: white;
+
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+
+        transition: background .2s, transform .2s;
+    }
+
+    .gift-copy-btn:hover {
+        background: #777b7e;
+    }
+
+    .gift-copy-btn:active {
+        transform: scale(.96);
+    }
+
+    .gift-copy-btn:focus-visible {
+        outline: 2px solid #536454;
+        outline-offset: 3px;
+    }
+
+    /* Kartu alamat kado */
+    .gift-card.address-card .gift-bank-name {
+        color: #536454;
+        font-size: 18px;
+    }
+
+    .gift-card.address-card .gift-card-number {
+        font-size: 20px !important;
+        letter-spacing: 0;
+    }
+
+    .gift-card.address-card .gift-card-owner {
+        max-width: 75%;
+        font-size: 15px !important;
+    }
+
 
     footer {
         padding: 44px 20px 30px;
@@ -945,6 +1207,24 @@
         color: var(--ink);
     }
 
+    @media (max-width: 350px) {
+        .gift-grid {
+            gap: 7px;
+        }
+
+        .gift-card {
+            padding: 8px;
+        }
+
+        .gift-card-number {
+            font-size: 11px !important;
+        }
+
+        .gift-card-owner {
+            font-size: 9px !important;
+        }
+    }
+
     @media (max-width: 480px) {
         .couple-profile {
             grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -981,6 +1261,73 @@
 
         .count-label {
             font-size: 11px;
+        }
+
+        #hadiah {
+            padding: 30px 14px 40px;
+        }
+
+        .gift-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .gift-card {
+            padding: 10px;
+            aspect-ratio: 1.25 / 1;
+            border-radius: 12px;
+        }
+
+        .gift-chip {
+            width: 26px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .gift-bank-logo {
+            max-width: 58px;
+            max-height: 20px;
+        }
+
+        .gift-bank-name {
+            font-size: 12px;
+        }
+
+        .gift-bank-name.sinarmas {
+            font-size: 10px;
+        }
+
+        .gift-card-number {
+            font-size: 12px !important;
+            letter-spacing: 0;
+            line-height: 1.3;
+        }
+
+        .gift-card-owner {
+            font-size: 10px !important;
+            letter-spacing: 0;
+            line-height: 1.3;
+        }
+
+        .gift-card.address-card .gift-card-number {
+            font-size: 12px !important;
+        }
+
+        .gift-card.address-card .gift-card-owner {
+            max-width: 100%;
+            font-size: 9px !important;
+        }
+
+        .gift-copy-btn {
+            right: 6px;
+            bottom: 6px;
+            min-width: 45px;
+            min-height: 23px;
+            padding: 4px 5px;
+            gap: 3px;
+            font-size: 9px;
+            border-radius: 5px;
         }
     }
 
@@ -1160,7 +1507,7 @@
             border-radius: 50% 50% 0 0 / 32% 32% 0 0;
         }
 
-      .curved-title {
+        .curved-title {
             width: 105%;
             height: 82px;
             top: -45px;
@@ -1190,8 +1537,43 @@
             row-gap: 28px;
         }
 
-        .location-box {
-            grid-template-columns: 1fr;
+         .location-box {
+            grid-template-columns: minmax(0, 1fr);
+            width: 100%;
+            margin-top: 22px;
+            border-radius: 16px;
+        }
+
+        .location-info {
+            padding: 25px 18px;
+        }
+
+        .location-info .event-icon {
+            margin-bottom: 8px;
+        }
+
+        .location-info h3 {
+            font-size: 25px;
+            margin: 8px 0;
+        }
+
+        .location-info p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 280px;
+            min-height: 280px;
+        }
+
+        .location-info .btn {
+            width: 100%;
+            max-width: 280px;
+            min-height: 46px;
+            padding: 12px 16px;
+            font-size: 12px;
         }
 
         .map-frame {
@@ -1200,6 +1582,21 @@
 
         .gift-grid {
             grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .location-info {
+            padding: 22px 14px;
+        }
+
+        .location-info h3 {
+            font-size: 22px;
+        }
+
+        .map-frame {
+            height: 240px;
+            min-height: 240px;
         }
     }
 
@@ -1275,6 +1672,24 @@
         }
     }
 
+    @media (min-width: 481px) and (max-width: 760px) {
+        .gift-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .gift-card {
+            padding: 13px;
+        }
+
+        .gift-card-number {
+            font-size: 15px !important;
+        }
+
+        .gift-card-owner {
+            font-size: 12px !important;
+        }
+    }
   </style>
 </head>
 <body>
@@ -1562,9 +1977,9 @@
     </section>
     <section class="rsvp" id="rsvp">
       <div class="section-inner center">
+        <h2 class="section-title script">Kehadiran</h2>
         <div class="eyebrow">Mohon konfirmasi kehadiran</div>
-        <h2 class="section-title script">RSVP</h2>
-        <p class="section-copy">Mohon konfirmasikan kehadiran Anda melalui formulir berikut.</p>
+        <!--<p class="section-copy">Mohon konfirmasikan kehadiran Anda melalui formulir berikut.</p>-->
         <form class="form-card" id="rsvpForm">
           <div class="form-row">
             <label for="guestName">Nama lengkap</label>
@@ -1597,24 +2012,98 @@
       </div>
     </section>
     <section id="hadiah">
-      <div class="section-inner center">
-        <div class="eyebrow">Tanda kasih</div>
-        <h2 class="section-title">Wedding Gift</h2>
-        <p class="section-copy">Doa restu Anda merupakan hadiah terindah bagi kami. Namun, apabila ingin berbagi tanda kasih, dapat melalui informasi berikut.</p>
-        <div class="gift-grid">
-          <div class="gift-card">
-            <h3>Bank BCA</h3><p id="accountNumber">1234567890</p>
-            <p>a.n. Raka Aditya</p>
-            <button class="btn btn-outline" type="button" onclick="copyAccount()">Salin Nomor Rekening</button>
-          </div>
-          <div class="gift-card">
-            <h3>Alamat Kado</h3>
-            <p>Raka &amp; Sari</p>
-            <p>Jl. Melati No. 12, Kota Bandung</p>
-            <button class="btn btn-outline" type="button" onclick="copyAddress()">Salin Alamat</button>
-          </div>
+        <div class="section-inner center">
+
+            <h2 class="section-title">Wedding Gift</h2>
+
+            <p class="section-copy">
+                Doa restu Bapak/Ibu merupakan hadiah terindah bagi kami.
+                Namun, apabila ingin berbagi tanda kasih, Bapak/Ibu
+                dapat memberikan hadiah secara cashless.
+                Terima kasih.
+            </p>
+
+            <div class="gift-grid">
+
+                <!-- KARTU BCA -->
+                <article class="gift-card">
+
+                    <div class="gift-card-top">
+                        <div class="gift-chip" aria-hidden="true"></div>
+
+                        <div class="gift-bank-name">
+                            BCA
+                        </div>
+                    </div>
+
+                    <div class="gift-card-info">
+                        <p class="gift-card-number">1234567890</p>
+                        <p class="gift-card-owner">Raka Aditya</p>
+                    </div>
+
+                    <button
+                        class="gift-copy-btn"
+                        type="button"
+                        onclick="copyText('1234567890', 'nomor rekening BCA')">
+                        ▢ Copy
+                    </button>
+
+                </article>
+
+                <!-- KARTU BANK KEDUA: GANTI SESUAI DATA -->
+                <article class="gift-card">
+
+                    <div class="gift-card-top">
+                        <div class="gift-chip" aria-hidden="true"></div>
+
+                        <div class="gift-bank-name sinarmas">
+                            sinarmas
+                        </div>
+                    </div>
+
+                    <div class="gift-card-info">
+                        <p class="gift-card-number">0987654321</p>
+                        <p class="gift-card-owner">Sari Putri</p>
+                    </div>
+
+                    <button
+                        class="gift-copy-btn"
+                        type="button"
+                        onclick="copyText('0987654321', 'nomor rekening bank kedua')">
+                        ▢ Copy
+                    </button>
+
+                </article>
+
+                <!-- KARTU ALAMAT KADO -->
+                <article class="gift-card address-card">
+
+                    <div class="gift-card-top">
+                        <div class="gift-chip" aria-hidden="true"></div>
+
+                        <div class="gift-bank-name">
+                            Alamat Kado
+                        </div>
+                    </div>
+
+                    <div class="gift-card-info">
+                        <p class="gift-card-number">Raka &amp; Sari</p>
+                        <p class="gift-card-owner">
+                            Jl. Melati No. 12, Kota Bandung
+                        </p>
+                    </div>
+
+                    <button
+                        class="gift-copy-btn"
+                        type="button"
+                        onclick="copyAddress()">
+                        ▢ Copy
+                    </button>
+
+                </article>
+
+            </div>
         </div>
-      </div>
     </section>
   </main>
   <footer>
