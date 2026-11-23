@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -17,12 +17,13 @@
       --sage: #e5e8dd;
       --sage-dark: #536454;
       --sage-hover: #3f5142;
-      --gold: #a99a83;
-      --ink: #28372d;
-      --muted: #687266;
+      --taupe: #9e8f77;
+      --taupe-dark: #857761;
+      --ink: #222523;
+      --muted: #5d635e;
       --line: rgba(40, 55, 45, 0.16);
-      --nav-bg: rgba(255, 253, 248, 0.92);
       --input-bg: #ffffff;
+      --couple-bg: #ffffff;
       --shadow: 0 14px 45px rgba(43, 52, 42, 0.09);
     }
 
@@ -33,12 +34,13 @@
       --sage: #181f1b;
       --sage-dark: #cbb37d;
       --sage-hover: #dcc591;
-      --gold: #d5be8a;
+      --taupe: #cbb37d;
+      --taupe-dark: #b69d66;
       --ink: #f3ece0;
-      --muted: #b5b0a4;
+      --muted: #b8b2a6;
       --line: rgba(235, 222, 195, 0.16);
-      --nav-bg: rgba(20, 25, 22, 0.92);
       --input-bg: #141916;
+      --couple-bg: #1a201d;
       --shadow: 0 16px 48px rgba(0, 0, 0, 0.38);
     }
 
@@ -51,7 +53,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 72px;
+      overflow-x: hidden;
     }
 
     body {
@@ -92,89 +94,74 @@
     }
 
     /* =========================================
-       NAVIGASI
+       ANIMASI SCROLL REVEAL
        ========================================= */
-    .nav {
-      position: fixed;
-      z-index: 30;
-      inset: 0 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 12px max(5vw, 22px);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: background-color 0.35s ease, border-color 0.35s ease;
+    .reveal-up,
+    .reveal-left,
+    .reveal-right,
+    .reveal-zoom {
+      opacity: 0;
+      will-change: opacity, transform;
+      transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .brand {
-      text-decoration: none;
-      font-family: "Great Vibes", cursive;
-      font-size: 28px;
-      line-height: 1;
-      color: var(--ink);
-      white-space: nowrap;
+    .reveal-up {
+      transform: translateY(34px);
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .reveal-left {
+      transform: translateX(-34px);
     }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: clamp(14px, 2.5vw, 30px);
+    .reveal-right {
+      transform: translateX(34px);
     }
 
-    .nav-links a {
-      text-decoration: none;
-      font-family: "Montserrat", sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.2s ease;
+    .reveal-zoom {
+      transform: scale(0.93) translateY(16px);
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--ink);
+    .reveal-up.visible,
+    .reveal-left.visible,
+    .reveal-right.visible,
+    .reveal-zoom.visible {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
     }
 
+    /* =========================================
+       TOMBOL PENGUBAH TEMA MELAYANG
+       ========================================= */
     .theme-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 30;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1px solid var(--line);
-      background: var(--paper);
+      background: rgba(255, 253, 248, 0.88);
       color: var(--ink);
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       transition: transform 0.2s ease, background-color 0.3s ease;
     }
 
-    .theme-btn:hover {
-      transform: translateY(-1px);
+    body.dark-mode .theme-btn {
+      background: rgba(28, 35, 31, 0.9);
     }
 
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      border-radius: 8px;
-      padding: 6px 11px;
-      font-size: 16px;
-      color: var(--ink);
-      cursor: pointer;
+    .theme-btn:hover {
+      transform: translateY(-2px);
     }
 
     /* =========================================
@@ -185,7 +172,7 @@
       width: 100%;
       min-height: 100vh;
       min-height: 100dvh;
-      padding: 80px 22px 60px;
+      padding: 60px 22px;
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -240,6 +227,18 @@
       color: #ffffff;
       width: min(740px, 100%);
       padding: 24px 12px;
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .eyebrow {
@@ -293,38 +292,8 @@
       background: rgba(255, 255, 255, 0.75);
     }
 
-    .scroll-cue {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.8);
-      font-family: "Montserrat", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .scroll-cue span {
-      width: 1px;
-      height: 26px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), transparent);
-      animation: scrollPulse 1.8s infinite ease-in-out;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { transform: scaleY(0.7); opacity: 0.5; }
-      50% { transform: scaleY(1); opacity: 1; }
-    }
-
     /* =========================================
-       TOMBOL UMUM & SECTION
+       TOMBOL & SECTION UMUM
        ========================================= */
     .btn {
       display: inline-flex;
@@ -383,133 +352,191 @@
       color: var(--muted);
     }
 
-    /* Animasi muncul halus saat scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     /* =========================================
        BAGIAN MEMPELAI
        ========================================= */
-    .couple-wrapper {
-      background: var(--paper);
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+    .couple-intro {
+      padding: 56px 22px 24px;
+      background: var(--couple-bg);
+    }
+
+    .couple-intro .section-copy {
+      margin-bottom: 0;
+    }
+
+    .couple-section {
+      padding: 0;
+      background: var(--couple-bg);
       overflow: hidden;
     }
 
     .couple-profile {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 44% 56%;
       align-items: end;
-      gap: 24px;
-      padding: 44px 32px 0;
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding-top: 28px;
+    }
+
+    .couple-profile.bride {
+      grid-template-columns: 56% 44%;
     }
 
     .profile-info {
       min-width: 0;
-      text-align: center;
-      padding: 24px 12px 48px;
       align-self: center;
+      text-align: center;
+      padding: 28px 12px 34px;
     }
 
     .profile-nickname {
       display: block;
       font-family: "Great Vibes", cursive;
-      font-size: 44px;
-      color: var(--gold);
-      line-height: 1.15;
-      margin-bottom: 4px;
+      font-size: clamp(34px, 7vw, 48px);
+      color: var(--taupe);
+      line-height: 1.1;
+      margin-bottom: 2px;
     }
 
     .profile-info h3 {
-      font-size: clamp(20px, 2.4vw, 25px);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(19px, 3.6vw, 27px);
       font-weight: 600;
-      margin: 0 0 10px;
+      line-height: 1.25;
+      margin: 0;
       color: var(--ink);
     }
 
-    .profile-info p {
-      margin: 3px 0;
-      font-size: 16.5px;
-      color: var(--muted);
+    .dashed-divider {
+      width: min(145px, 82%);
+      height: 0;
+      margin: 10px auto 12px;
+      border-top: 1.5px dashed var(--ink);
+      opacity: 0.65;
     }
 
-    .profile-divider {
-      margin-top: 16px;
-      color: var(--gold);
-      letter-spacing: 0.25em;
-      font-size: 13px;
+    .profile-info p {
+      margin: 2px 0;
+      font-size: clamp(14.5px, 2.8vw, 18px);
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      background: var(--taupe);
+      color: #ffffff;
+      text-decoration: none;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(14px, 2.6vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    body.dark-mode .social-link {
+      color: #181f1b;
+    }
+
+    .social-link:hover {
+      background: var(--taupe-dark);
+      transform: translateY(-1px);
+    }
+
+    .social-link svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
     }
 
     .profile-photo-wrap {
       position: relative;
       width: 100%;
-      max-width: 340px;
-      justify-self: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 440px;
+      align-self: end;
+      padding-top: clamp(36px, 7vw, 56px);
+    }
+
+    .couple-profile.groom .profile-photo-wrap {
+      justify-self: end;
+    }
+
+    .couple-profile.bride .profile-photo-wrap {
+      justify-self: start;
     }
 
     .curved-title {
+      position: absolute;
+      top: clamp(36px, 7vw, 56px);
+      left: 0;
       width: 100%;
-      max-width: 320px;
-      height: 68px;
-      margin-bottom: -14px;
+      height: auto;
       overflow: visible;
+      z-index: 3;
       pointer-events: none;
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.2));
     }
 
     .curved-title text {
       fill: var(--ink);
-      font-family: "Montserrat", sans-serif;
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: 3.5px;
+      font-family: "Caveat", cursive;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
 
     .profile-photo {
-      width: 100%;
-      height: 390px;
       display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4.15;
       object-fit: cover;
       object-position: center top;
-      border-radius: 180px 180px 0 0;
-      border: 1px solid var(--line);
-      border-bottom: 0;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 999px 999px 0 0;
+      box-shadow: 0 -2px 22px rgba(0, 0, 0, 0.22);
+      position: relative;
+      z-index: 1;
     }
 
     .couple-names {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      padding: 20px 16px;
+      gap: clamp(12px, 3vw, 22px);
+      padding: clamp(18px, 4vw, 28px) 16px;
       background:
-        linear-gradient(rgba(30, 38, 32, 0.72), rgba(30, 38, 32, 0.72)),
-        url("https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80")
+        linear-gradient(rgba(224, 224, 224, 0.86), rgba(214, 214, 214, 0.88)),
+        url("https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=80")
         center / cover;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       text-align: center;
-      color: #ffffff;
+      color: #181818;
       font-family: "Great Vibes", cursive;
-      font-size: clamp(38px, 6vw, 54px);
+      font-size: clamp(42px, 9vw, 66px);
+      line-height: 1.1;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+    }
+
+    body.dark-mode .couple-names {
+      background:
+        linear-gradient(rgba(38, 44, 40, 0.88), rgba(30, 36, 32, 0.92)),
+        url("https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=80")
+        center / cover;
+      color: #f4e6c3;
     }
 
     .couple-ampersand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 0.65em;
-      font-weight: 600;
-      color: #e6d3a3;
+      font-size: 0.88em;
     }
 
     /* =========================================
@@ -548,7 +575,7 @@
       justify-content: center;
       border-radius: 50%;
       background: rgba(169, 154, 131, 0.14);
-      color: var(--gold);
+      color: var(--taupe);
       font-size: 22px;
     }
 
@@ -565,7 +592,7 @@
       margin-top: 8px;
       font-size: 22px;
       font-weight: 600;
-      color: var(--gold);
+      color: var(--taupe);
     }
 
     .reception-date {
@@ -590,11 +617,11 @@
     }
 
     .date-side:first-child {
-      border-right: 1px solid var(--gold);
+      border-right: 1px solid var(--taupe);
     }
 
     .date-side:last-child {
-      border-left: 1px solid var(--gold);
+      border-left: 1px solid var(--taupe);
     }
 
     .date-number {
@@ -681,7 +708,7 @@
       border-radius: 50%;
       background: rgba(169, 154, 131, 0.14);
       font-size: 20px;
-      color: var(--gold);
+      color: var(--taupe);
     }
 
     .story-item h3 {
@@ -695,7 +722,7 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.14em;
-      color: var(--gold);
+      color: var(--taupe);
       margin-bottom: 10px;
     }
 
@@ -741,7 +768,7 @@
       justify-content: center;
       border-radius: 50%;
       background: rgba(169, 154, 131, 0.15);
-      color: var(--gold);
+      color: var(--taupe);
       font-size: 24px;
     }
 
@@ -835,12 +862,13 @@
     }
 
     /* =========================================
-       WEDDING GIFT - KARTU REKENING
+       WEDDING GIFT — PROPORSI STANDAR ID-1 (ISO/IEC 7810)
        ========================================= */
     .gift-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 356px));
+      justify-content: center;
+      gap: 20px;
       width: 100%;
       margin: 30px auto 0;
     }
@@ -848,17 +876,20 @@
     .gift-card {
       position: relative;
       width: 100%;
-      min-height: 196px;
+      aspect-ratio: 85.6 / 53.98;
+      min-height: 0;
       overflow: hidden;
       isolation: isolate;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
+      padding: clamp(16px, 5.5%, 22px) clamp(18px, 6.5%, 24px);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      border-radius: 3.72% / 5.9%;
       background:
         radial-gradient(ellipse at 85% 20%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.35) 35%, transparent 60%),
         radial-gradient(ellipse at 100% 100%, rgba(198, 202, 198, 0.45), transparent 50%),
         linear-gradient(135deg, #fdfdfc 0%, #efefe9 50%, #ffffff 100%);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+      box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.11),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.85);
       text-align: left;
       display: flex;
       flex-direction: column;
@@ -883,7 +914,7 @@
       top: -45%;
       z-index: -1;
       pointer-events: none;
-      border: 1px solid rgba(169, 154, 131, 0.25);
+      border: 1px solid rgba(169, 154, 131, 0.26);
       border-radius: 50%;
       transform: rotate(30deg);
     }
@@ -896,19 +927,43 @@
     }
 
     .gift-chip {
-      width: 38px;
-      height: 29px;
+      width: 14.5%;
+      max-width: 48px;
+      min-width: 36px;
+      aspect-ratio: 1.27 / 1;
       flex-shrink: 0;
-      border: 1px solid #b7a16c;
-      border-radius: 6px;
-      background: linear-gradient(135deg, #f7e7a9, #c7a35c, #f5e5a5);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      border: 1px solid #b39b63;
+      border-radius: 16% / 20%;
+      background:
+        linear-gradient(
+          90deg,
+          transparent 31%,
+          rgba(120, 92, 36, 0.35) 32.5%,
+          transparent 34%,
+          transparent 66%,
+          rgba(120, 92, 36, 0.35) 67.5%,
+          transparent 69%
+        ),
+        linear-gradient(
+          0deg,
+          transparent 32%,
+          rgba(120, 92, 36, 0.35) 33.5%,
+          transparent 35%,
+          transparent 65%,
+          rgba(120, 92, 36, 0.35) 66.5%,
+          transparent 68%
+        ),
+        linear-gradient(135deg, #f8e8aa 0%, #c6a158 52%, #f4e2a0 100%);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.8),
+        0 1px 2px rgba(0, 0, 0, 0.08);
     }
 
     .gift-bank-name {
       font-family: "Montserrat", sans-serif;
-      font-size: 18px;
+      font-size: clamp(15px, 4.4vw, 18px);
       font-weight: 700;
+      letter-spacing: 0.03em;
       color: #0866b5;
       text-align: right;
     }
@@ -919,7 +974,7 @@
 
     .gift-bank-name.sinarmas {
       color: #c8322b;
-      font-size: 16px;
+      font-size: clamp(14px, 4vw, 16px);
     }
 
     body.dark-mode .gift-bank-name.sinarmas {
@@ -928,43 +983,59 @@
 
     .gift-card.address-card .gift-bank-name {
       color: var(--sage-dark);
-      font-size: 15px;
+      font-size: clamp(13px, 3.8vw, 15px);
+    }
+
+    .gift-card-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
     }
 
     .gift-card-info {
-      margin-top: 18px;
-      padding-right: 78px;
+      min-width: 0;
+      flex: 1;
     }
 
     .gift-card-number {
-      margin: 0 0 4px;
+      margin: 0 0 2px;
       font-family: "Montserrat", sans-serif;
-      font-size: 19px;
+      font-size: clamp(15px, 4.5vw, 19px);
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
       overflow-wrap: anywhere;
+    }
+
+    .gift-card.address-card .gift-card-number {
+      font-size: clamp(14px, 4.2vw, 17px);
+      letter-spacing: 0.02em;
     }
 
     .gift-card-owner {
       margin: 0;
       font-family: "Montserrat", sans-serif;
-      font-size: 13px;
-      opacity: 0.82;
-      line-height: 1.45;
+      font-size: clamp(11px, 3.2vw, 12.5px);
+      opacity: 0.84;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .gift-copy-btn {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 3;
+      flex-shrink: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 8px 13px;
+      padding: 7px 13px;
       border: 0;
-      border-radius: 8px;
+      border-radius: 7px;
       background: var(--sage-dark);
       color: #ffffff;
       font-family: "Montserrat", sans-serif;
@@ -997,7 +1068,7 @@
     }
 
     .ornament {
-      color: var(--gold);
+      color: var(--taupe);
       font-size: 24px;
       margin-bottom: 8px;
     }
@@ -1070,42 +1141,13 @@
     /* =========================================
        RESPONSIVE BREAKPOINTS
        ========================================= */
-    @media (max-width: 860px) {
-      .gift-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
     @media (max-width: 760px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 10px 22px 16px;
-        background: var(--paper);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 11px 4px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav-links a:last-child {
-        border-bottom: 0;
+      .theme-btn {
+        top: 14px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
       }
 
       section {
@@ -1113,26 +1155,20 @@
       }
 
       .couple-profile {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 32px 20px 0;
+        grid-template-columns: 45% 55%;
+        padding-top: 22px;
       }
 
-      /* Di HP, foto mempelai wanita tetap di atas teks agar konsisten */
-      .couple-profile.bride .profile-photo-wrap {
-        order: -1;
+      .couple-profile.bride {
+        grid-template-columns: 55% 45%;
       }
 
       .profile-info {
-        padding: 16px 8px 28px;
+        padding: 20px 8px 26px;
       }
 
-      .profile-photo-wrap {
-        max-width: 280px;
-      }
-
-      .profile-photo {
-        height: 320px;
+      .curved-title text {
+        font-size: 33px;
       }
 
       .event-grid {
@@ -1154,13 +1190,8 @@
     }
 
     @media (max-width: 560px) {
-      .story-grid,
-      .gift-grid {
+      .story-grid {
         grid-template-columns: 1fr;
-      }
-
-      .gift-card {
-        min-height: 168px;
       }
 
       .countdown {
@@ -1181,30 +1212,18 @@
       }
 
       .hero-slide,
-      .reveal {
-        opacity: 1;
-        transform: none;
+      .reveal-up,
+      .reveal-left,
+      .reveal-right,
+      .reveal-zoom {
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <nav class="nav" aria-label="Navigasi utama">
-    <a class="brand" href="#beranda">Raka &amp; Sari</a>
-    <div class="nav-actions">
-      <div class="nav-links" id="navLinks">
-        <a href="#beranda">Beranda</a>
-        <a href="#mempelai">Mempelai</a>
-        <a href="#acara">Acara</a>
-        <a href="#cerita">Cerita</a>
-        <a href="#lokasi">Lokasi</a>
-        <a href="#rsvp">RSVP</a>
-        <a href="#hadiah">Hadiah</a>
-      </div>
-      <button type="button" class="theme-btn" id="themeToggle" aria-label="Ganti Tema" title="Ganti Tema">🌙</button>
-      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
-    </div>
-  </nav>
+  <button type="button" class="theme-btn" id="themeToggle" aria-label="Ganti Tema" title="Ganti Tema">🌙</button>
 
   <main>
     <header class="hero" id="beranda">
@@ -1221,91 +1240,112 @@
         <p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dan menjadi bagian dari hari istimewa kami.</p>
         <div class="hero-date">Senin, 23 Agustus 2027</div>
       </div>
-
-      <a href="#mempelai" class="scroll-cue" aria-label="Gulir ke bawah">
-        Scroll
-        <span></span>
-      </a>
     </header>
 
-    <section id="mempelai">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Assalamu’alaikum Warahmatullahi Wabarakatuh</div>
-        <h2 class="section-title">Our Wedding</h2>
-        <p class="section-copy">
+    <!-- PENGANTAR MEMPELAI -->
+    <section class="couple-intro" id="mempelai">
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Assalamu’alaikum Warahmatullahi Wabarakatuh</div>
+        <h2 class="section-title reveal-up" data-delay="100">Our Wedding</h2>
+        <p class="section-copy reveal-up" data-delay="200">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
         </p>
+      </div>
+    </section>
 
-        <div class="couple-wrapper">
-          <div class="couple-profile groom">
-            <div class="profile-info">
-              <span class="profile-nickname">Raka</span>
-              <h3>Raka Aditya Pratama, S.T.</h3>
-              <p>Putra Pertama dari Pasangan</p>
-              <p><strong>Bapak Hendra Wijaya</strong> &amp; <strong>Ibu Ratna Sari</strong></p>
-              <p>Kota Bandung</p>
-              <div class="profile-divider">✦ ✦ ✦</div>
-            </div>
+    <!-- PROFIL MEMPELAI -->
+    <section class="couple-section" aria-label="Profil Kedua Mempelai">
+      <!-- MEMPELAI PRIA -->
+      <div class="couple-profile groom">
+        <div class="profile-info reveal-left">
+          <span class="profile-nickname">Raka</span>
+          <h3>Raka Aditya Pratama</h3>
+          <div class="dashed-divider" aria-hidden="true"></div>
+          <p>Putra dari Pasangan</p>
+          <p>Ayah Hendra &amp;</p>
+          <p>Ibu Ratna</p>
+          <p>Beralamat di Bandung</p>
+          <div class="dashed-divider" aria-hidden="true"></div>
+          <a class="social-link" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Raka">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>rakaaditya</span>
+          </a>
+        </div>
 
-            <div class="profile-photo-wrap">
-              <svg class="curved-title" viewBox="0 0 340 80" aria-hidden="true">
-                <path id="groom-curve" d="M 25,68 Q 170,12 315,68" fill="none" />
-                <text>
-                  <textPath href="#groom-curve" startOffset="50%" text-anchor="middle">THE GROOM</textPath>
-                </text>
-              </svg>
-              <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85"
-                alt="Foto mempelai pria Raka"
-                class="profile-photo"
-                loading="lazy"
-              >
-            </div>
-          </div>
+        <div class="profile-photo-wrap reveal-right" data-delay="150">
+          <svg class="curved-title" viewBox="0 0 360 180" aria-hidden="true">
+            <path id="groom-curve" d="M -14,180 A 194,194 0 0,1 374,180" fill="none" />
+            <text>
+              <textPath href="#groom-curve" startOffset="50%" text-anchor="middle">THE GROOM</textPath>
+            </text>
+          </svg>
+          <img
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85"
+            alt="Foto mempelai pria Raka"
+            class="profile-photo"
+            loading="lazy"
+          >
+        </div>
+      </div>
 
-          <div class="couple-names">
-            <span>Raka</span>
-            <span class="couple-ampersand">&amp;</span>
-            <span>Sari</span>
-          </div>
+      <!-- PITA NAMA TENGAH -->
+      <div class="couple-names reveal-zoom">
+        <span>Raka</span>
+        <span class="couple-ampersand">&amp;</span>
+        <span>Sari</span>
+      </div>
 
-          <div class="couple-profile bride">
-            <div class="profile-photo-wrap">
-              <svg class="curved-title" viewBox="0 0 340 80" aria-hidden="true">
-                <path id="bride-curve" d="M 25,68 Q 170,12 315,68" fill="none" />
-                <text>
-                  <textPath href="#bride-curve" startOffset="50%" text-anchor="middle">THE BRIDE</textPath>
-                </text>
-              </svg>
-              <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=85"
-                alt="Foto mempelai wanita Sari"
-                class="profile-photo"
-                loading="lazy"
-              >
-            </div>
+      <!-- MEMPELAI WANITA -->
+      <div class="couple-profile bride">
+        <div class="profile-photo-wrap reveal-left">
+          <svg class="curved-title" viewBox="0 0 360 180" aria-hidden="true">
+            <path id="bride-curve" d="M -14,180 A 194,194 0 0,1 374,180" fill="none" />
+            <text>
+              <textPath href="#bride-curve" startOffset="50%" text-anchor="middle">THE BRIDE</textPath>
+            </text>
+          </svg>
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=85"
+            alt="Foto mempelai wanita Sari"
+            class="profile-photo"
+            loading="lazy"
+          >
+        </div>
 
-            <div class="profile-info">
-              <span class="profile-nickname">Sari</span>
-              <h3>Sari Putri Maharani, S.E.</h3>
-              <p>Putri Kedua dari Pasangan</p>
-              <p><strong>Bapak Ahmad Fauzi</strong> &amp; <strong>Ibu Siti Aminah</strong></p>
-              <p>Kota Bandung</p>
-              <div class="profile-divider">✦ ✦ ✦</div>
-            </div>
-          </div>
+        <div class="profile-info reveal-right" data-delay="150">
+          <span class="profile-nickname">Sari</span>
+          <h3>Sari Putri Maharani</h3>
+          <div class="dashed-divider" aria-hidden="true"></div>
+          <p>Putri dari Pasangan</p>
+          <p>Ayah Ahmad &amp;</p>
+          <p>Ibu Aminah</p>
+          <p>Beralamat di Bandung</p>
+          <div class="dashed-divider" aria-hidden="true"></div>
+          <a class="social-link" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Sari">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>sariputri</span>
+          </a>
         </div>
       </div>
     </section>
 
+    <!-- ACARA & COUNTDOWN -->
     <section class="events" id="acara">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Catat Tanggalnya</div>
-        <h2 class="section-title">Save The Date</h2>
-        <p class="section-copy">Dengan penuh kebahagiaan, kami menantikan kehadiran Anda pada rangkaian acara pernikahan kami.</p>
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Catat Tanggalnya</div>
+        <h2 class="section-title reveal-up" data-delay="100">Save The Date</h2>
+        <p class="section-copy reveal-up" data-delay="200">Dengan penuh kebahagiaan, kami menantikan kehadiran Anda pada rangkaian acara pernikahan kami.</p>
 
         <div class="event-grid">
-          <article class="reception-card">
+          <article class="reception-card reveal-up" data-delay="120">
             <div class="event-icon" aria-hidden="true">❖</div>
             <h3 class="reception-title">Akad Nikah</h3>
             <div class="reception-month">Agustus</div>
@@ -1321,7 +1361,7 @@
             </div>
           </article>
 
-          <article class="reception-card">
+          <article class="reception-card reveal-up" data-delay="260">
             <div class="event-icon" aria-hidden="true">♡</div>
             <h3 class="reception-title">Resepsi Pernikahan</h3>
             <div class="reception-month">Agustus</div>
@@ -1338,7 +1378,7 @@
           </article>
         </div>
 
-        <div class="countdown" aria-label="Hitung mundur pernikahan">
+        <div class="countdown reveal-zoom" data-delay="200" aria-label="Hitung mundur pernikahan">
           <div class="count-item">
             <span class="count-num" id="days">00</span>
             <span class="count-label">Hari</span>
@@ -1359,30 +1399,31 @@
       </div>
     </section>
 
+    <!-- OUR STORY -->
     <section id="cerita">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Setiap Kisah Punya Awal</div>
-        <h2 class="section-title script">Our Story</h2>
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Setiap Kisah Punya Awal</div>
+        <h2 class="section-title script reveal-up" data-delay="100">Our Story</h2>
         <div class="story-grid">
-          <article class="story-item">
+          <article class="story-item reveal-up" data-delay="100">
             <div class="story-icon" aria-hidden="true">♡</div>
             <h3>Pertemuan</h3>
             <div class="story-year">2019</div>
             <p>Kisah kami dimulai dari sebuah pertemuan sederhana yang tidak pernah kami sangka.</p>
           </article>
-          <article class="story-item">
+          <article class="story-item reveal-up" data-delay="220">
             <div class="story-icon" aria-hidden="true">✉</div>
             <h3>Menjalin Hubungan</h3>
             <div class="story-year">2020</div>
             <p>Perlahan, kami belajar saling mengenal, memahami, dan tumbuh bersama.</p>
           </article>
-          <article class="story-item">
+          <article class="story-item reveal-up" data-delay="340">
             <div class="story-icon" aria-hidden="true">✦</div>
             <h3>Lamaran</h3>
             <div class="story-year">2026</div>
             <p>Dengan restu keluarga, kami memantapkan hati untuk melangkah ke jenjang berikutnya.</p>
           </article>
-          <article class="story-item">
+          <article class="story-item reveal-up" data-delay="460">
             <div class="story-icon" aria-hidden="true">⌂</div>
             <h3>Menikah</h3>
             <div class="story-year">2027</div>
@@ -1392,11 +1433,12 @@
       </div>
     </section>
 
+    <!-- LOKASI -->
     <section id="lokasi" class="events">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Kami Menunggu Kehadiran Anda</div>
-        <h2 class="section-title">Petunjuk Lokasi</h2>
-        <div class="location-box">
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Kami Menunggu Kehadiran Anda</div>
+        <h2 class="section-title reveal-up" data-delay="100">Petunjuk Lokasi</h2>
+        <div class="location-box reveal-zoom" data-delay="180">
           <div class="location-info">
             <div class="event-icon" aria-hidden="true">⌖</div>
             <h3>Gedung Serbaguna Melati</h3>
@@ -1417,11 +1459,12 @@
       </div>
     </section>
 
+    <!-- RSVP -->
     <section id="rsvp">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Mohon Konfirmasi Kehadiran</div>
-        <h2 class="section-title script">Kehadiran</h2>
-        <form class="form-card" id="rsvpForm">
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Mohon Konfirmasi Kehadiran</div>
+        <h2 class="section-title script reveal-up" data-delay="100">Kehadiran</h2>
+        <form class="form-card reveal-up" data-delay="180" id="rsvpForm">
           <div class="form-row">
             <label for="guestName">Nama Lengkap</label>
             <input id="guestName" name="nama" autocomplete="name" placeholder="Masukkan nama Anda" required>
@@ -1453,55 +1496,62 @@
       </div>
     </section>
 
+    <!-- WEDDING GIFT -->
     <section id="hadiah" class="events">
-      <div class="section-inner center reveal">
-        <div class="eyebrow">Tanda Kasih</div>
-        <h2 class="section-title">Wedding Gift</h2>
-        <p class="section-copy">
+      <div class="section-inner center">
+        <div class="eyebrow reveal-up">Tanda Kasih</div>
+        <h2 class="section-title reveal-up" data-delay="100">Wedding Gift</h2>
+        <p class="section-copy reveal-up" data-delay="180">
           Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun apabila ingin memberikan tanda kasih, dapat disalurkan melalui rekening atau alamat berikut.
         </p>
 
         <div class="gift-grid">
-          <article class="gift-card">
+          <article class="gift-card reveal-zoom" data-delay="120">
             <div class="gift-card-top">
               <div class="gift-chip" aria-hidden="true"></div>
               <div class="gift-bank-name">BCA</div>
             </div>
-            <div class="gift-card-info">
-              <p class="gift-card-number">1234567890</p>
-              <p class="gift-card-owner">a.n. Raka Aditya</p>
+            <div class="gift-card-bottom">
+              <div class="gift-card-info">
+                <p class="gift-card-number">1234567890</p>
+                <p class="gift-card-owner">a.n. Raka Aditya</p>
+              </div>
+              <button class="gift-copy-btn" type="button" data-copy="1234567890" data-label="Nomor rekening BCA">
+                Salin
+              </button>
             </div>
-            <button class="gift-copy-btn" type="button" data-copy="1234567890" data-label="Nomor rekening BCA">
-              Salin
-            </button>
           </article>
 
-          <article class="gift-card">
+          <article class="gift-card reveal-zoom" data-delay="240">
             <div class="gift-card-top">
               <div class="gift-chip" aria-hidden="true"></div>
               <div class="gift-bank-name sinarmas">Bank Sinarmas</div>
             </div>
-            <div class="gift-card-info">
-              <p class="gift-card-number">0987654321</p>
-              <p class="gift-card-owner">a.n. Sari Putri</p>
+            <div class="gift-card-bottom">
+              <div class="gift-card-info">
+                <p class="gift-card-number">0987654321</p>
+                <p class="gift-card-owner">a.n. Sari Putri</p>
+              </div>
+              <button class="gift-copy-btn" type="button" data-copy="0987654321" data-label="Nomor rekening Sinarmas">
+                Salin
+              </button>
             </div>
-            <button class="gift-copy-btn" type="button" data-copy="0987654321" data-label="Nomor rekening Sinarmas">
-              Salin
-            </button>
           </article>
 
-          <article class="gift-card address-card">
+          <article class="gift-card address-card reveal-zoom" data-delay="360">
             <div class="gift-card-top">
               <div class="gift-chip" aria-hidden="true"></div>
               <div class="gift-bank-name">Alamat Kado</div>
             </div>
-            <div class="gift-card-info">
-              <p class="gift-card-number">Raka &amp; Sari</p>
-              <p class="gift-card-owner">Jl. Melati No. 12, Kota Bandung, Jawa Barat</p>
+            <div class="gift-card-bottom">
+              <div class="gift-card-info">
+                <p class="gift-card-number">Raka &amp; Sari</p>
+                <p class="gift-card-owner">Jl. Melati No. 12, Kota Bandung, Jawa Barat</p>
+              </div>
+              <button class="gift-copy-btn" type="button" data-copy="Raka & Sari, Jl. Melati No. 12, Kota Bandung, Jawa Barat" data-label="Alamat kado">
+                Salin
+              </button>
             </div>
-            <button class="gift-copy-btn" type="button" data-copy="Raka & Sari, Jl. Melati No. 12, Kota Bandung, Jawa Barat" data-label="Alamat kado">
-              Salin
-            </button>
           </article>
         </div>
       </div>
@@ -1509,10 +1559,12 @@
   </main>
 
   <footer>
-    <div class="ornament" aria-hidden="true">❧</div>
-    <div class="script">Raka &amp; Sari</div>
-    <p>Merupakan kebahagiaan bagi kami untuk berbagi hari istimewa ini bersama Anda.</p>
-    <p>Terima kasih atas doa dan restunya.</p>
+    <div class="reveal-up">
+      <div class="ornament" aria-hidden="true">❧</div>
+      <div class="script">Raka &amp; Sari</div>
+      <p>Merupakan kebahagiaan bagi kami untuk berbagi hari istimewa ini bersama Anda.</p>
+      <p>Terima kasih atas doa dan restunya.</p>
+    </div>
   </footer>
 
   <button type="button" class="top-button" id="topButton" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
@@ -1521,10 +1573,10 @@
   <script>
     // ===== PENGATURAN UTAMA =====
     const weddingDate = new Date("2027-08-23T08:00:00+07:00");
-    const whatsappNumber = "6281234567890"; // Ganti dengan nomor WhatsApp penerima (tanpa +)
+    const whatsappNumber = "6281234567890";
     // ============================
 
-    // 1. Sinkronisasi Dark Mode dengan halaman pembuka
+    // 1. Sinkronisasi Dark Mode
     const themeToggle = document.getElementById("themeToggle");
     const metaTheme = document.getElementById("metaThemeColor");
     let isDarkMode = localStorage.getItem("mode-undangan") === "dark";
@@ -1560,25 +1612,7 @@
       }
     })();
 
-    // 3. Navigasi Mobile
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener("click", () => {
-        const opened = navLinks.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", String(opened));
-        menuToggle.textContent = opened ? "✕" : "☰";
-      });
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.textContent = "☰";
-        });
-      });
-    }
-
-    // 4. Hitung Mundur
+    // 3. Hitung Mundur
     function updateCountdown() {
       const diff = weddingDate.getTime() - Date.now();
       const values = diff <= 0
@@ -1599,7 +1633,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // 5. Logika Form RSVP & WhatsApp
+    // 4. Logika Form RSVP & WhatsApp
     const attendanceSelect = document.getElementById("attendance");
     const guestCountSelect = document.getElementById("guestCount");
     const rsvpForm = document.getElementById("rsvpForm");
@@ -1634,7 +1668,7 @@
       });
     }
 
-    // 6. Tombol Salin Rekening / Alamat dengan Notifikasi Toast
+    // 5. Tombol Salin Rekening / Alamat
     let toastTimer = null;
     function showToast(msg) {
       const toast = document.getElementById("toast");
@@ -1677,7 +1711,7 @@
       });
     });
 
-    // 7. Tombol Kembali ke Atas (tampil setelah scroll melewati hero)
+    // 6. Tombol Kembali ke Atas
     const topButton = document.getElementById("topButton");
     if (topButton) {
       window.addEventListener("scroll", () => {
@@ -1689,7 +1723,7 @@
       });
     }
 
-    // 8. Transisi Masuk Halaman & Animasi Reveal
+    // 7. Transisi Masuk & Scroll Reveal dengan Stagger Delay
     if (sessionStorage.getItem("transisiUndangan") === "true") {
       sessionStorage.removeItem("transisiUndangan");
       if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1697,23 +1731,38 @@
       }
     }
 
-    const revealElements = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries) => {
+    const revealElements = document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right, .reveal-zoom");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
+            const el = entry.target;
+            const delay = Number(el.getAttribute("data-delay") || 0);
+
+            if (delay > 0) {
+              el.style.transitionDelay = `${delay}ms`;
+            }
+
+            el.classList.add("visible");
+
+            setTimeout(() => {
+              el.style.transitionDelay = "";
+            }, 950 + delay);
+
+            observer.unobserve(el);
           }
         });
-      }, { threshold: 0.12 });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      });
 
-      revealElements.forEach((el) => observer.observe(el));
+      revealElements.forEach((el) => revealObserver.observe(el));
     } else {
       revealElements.forEach((el) => el.classList.add("visible"));
     }
 
-    // 9. Slideshow Hero
+    // 8. Slideshow Hero
     const slides = document.querySelectorAll(".hero-slide");
     if (slides.length > 1) {
       let currentSlide = 0;
