@@ -82,54 +82,43 @@
       );
     }
 
-    /* Tombol Dark Mode */
-    .theme-toggle {
+    /* Tombol Pengubah Tema Melayang (seragam dengan halaman undangan) */
+    .theme-btn {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
+      top: 18px;
+      right: 18px;
+      z-index: 30;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(40, 55, 45, 0.16);
 
-      padding: 9px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      border-radius: 999px;
-
-      background: rgba(247, 244, 237, 0.88);
-      color: #28372d;
-
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      background: rgba(255, 253, 248, 0.88);
+      color: #222523;
+      font-size: 16px;
       cursor: pointer;
       user-select: none;
 
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
 
       transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
     }
 
-    .theme-toggle:hover {
+    .theme-btn:hover {
       transform: translateY(-2px);
     }
 
-    .theme-toggle:active {
-      transform: scale(0.97);
-    }
-
-    .theme-toggle:focus-visible {
-      outline: 2px solid currentColor;
-      outline-offset: 4px;
+    .theme-btn:active {
+      transform: scale(0.96);
     }
 
     /* Kartu Cover Undangan */
@@ -331,10 +320,10 @@
       background: linear-gradient(135deg, #ebd6a1 0%, #d8bd7e 100%);
     }
 
-    body.dark-mode .theme-toggle {
-      background: rgba(28, 34, 29, 0.92);
-      color: #f7f4ed;
-      border-color: rgba(232, 214, 168, 0.32);
+    body.dark-mode .theme-btn {
+      background: rgba(28, 35, 31, 0.9);
+      color: #f3ece0;
+      border-color: rgba(235, 222, 195, 0.16);
     }
 
     /* Fokus keyboard yang jelas */
@@ -381,15 +370,18 @@
       }
     }
 
-    /* Responsif layar HP kecil */
-    @media (max-width: 480px) {
-      .theme-toggle {
+    /* Responsif layar HP & tablet */
+    @media (max-width: 760px) {
+      .theme-btn {
         top: 14px;
         right: 14px;
-        padding: 8px 13px;
-        font-size: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
       }
+    }
 
+    @media (max-width: 480px) {
       .teks-undangan {
         font-size: 13.5px;
       }
@@ -415,14 +407,12 @@
 <body>
   <button
     type="button"
-    class="theme-toggle"
+    class="theme-btn"
     id="themeToggle"
-    aria-label="Aktifkan Dark Mode"
+    aria-label="Ganti Tema"
     aria-pressed="false"
-  >
-    <span id="themeIcon" aria-hidden="true">🌙</span>
-    <span id="themeLabel">Dark Mode</span>
-  </button>
+    title="Ganti Tema"
+  >🌙</button>
 
   <main class="cover-page">
     <div class="eyebrow">Undangan Pernikahan</div>
@@ -533,8 +523,6 @@
 
     // 3. Pengaturan Dark Mode & Meta Theme Color
     const tombolTema = document.getElementById("themeToggle");
-    const ikonTema = document.getElementById("themeIcon");
-    const labelTema = document.getElementById("themeLabel");
     const metaTheme = document.getElementById("metaThemeColor");
 
     let modeGelap = localStorage.getItem("mode-undangan") === "dark";
@@ -542,9 +530,7 @@
     function terapkanTema() {
       document.body.classList.toggle("dark-mode", modeGelap);
 
-      ikonTema.textContent = modeGelap ? "☀️" : "🌙";
-      labelTema.textContent = modeGelap ? "Light Mode" : "Dark Mode";
-
+      tombolTema.textContent = modeGelap ? "☀️" : "🌙";
       tombolTema.setAttribute(
         "aria-label",
         modeGelap ? "Aktifkan Light Mode" : "Aktifkan Dark Mode"
